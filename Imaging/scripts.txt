@@ -1,0 +1,2 @@
+fswebcam -r 1280x720 --no-banner /images/image1.jpg
+raspistill -h 3040 -w 4056 -ss 500000 -o ~/Desktop/test.jpg
