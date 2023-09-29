@@ -85,13 +85,9 @@ void loop(){
   Now = micros();
   ElapsedTime += Now-LastTimeCheckpoint;
   LastTimeCheckpoint = Now;
-
-  // Serial.println(TrackingMicroSecondsDelay);
-  // Serial.println(ElapsedTime >= TrackingMicroSecondsDelay);
   if (ElapsedTime >= TrackingMicroSecondsDelay){
     ElapsedTime = 0;
     makeTrackingStep();
-    Serial.println("Taking tracking step");
   }
 
   
@@ -120,7 +116,7 @@ void serialEvent() {
   while (Serial.available()) {
     char inChar = (char)Serial.read();
     MovementCommand += inChar;
-    if (inChar == '\n') {
+    if (inChar == '\r') {
       CommandFinishedReceiving = true;
     }
   }
