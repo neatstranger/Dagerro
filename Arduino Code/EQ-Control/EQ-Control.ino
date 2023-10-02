@@ -9,8 +9,8 @@ const uint8_t RightAscensionChipSelectPin = 4;
 const uint8_t DeclinationChipSelectPin = 5;
 
 
-const uint32_t TrackingMicroSecondsDelay = 126562 * 2;
-const float ArcSecondsPerStep = 0.126562 *2;
+const uint32_t TrackingMicroSecondsDelay = 126562;
+const float ArcSecondsPerStep = 0.126562;
 
 
 DRV8434S RightAscensionStepperDriver;
@@ -69,8 +69,8 @@ void setup(){
   Serial.println("Motor output enabled.");
 
 
-  RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
-  DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
+  RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep256);
+  DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep256);
 
 
   LastTimeCheckpoint = 0;
