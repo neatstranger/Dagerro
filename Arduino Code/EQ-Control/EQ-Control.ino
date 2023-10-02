@@ -9,7 +9,7 @@ const uint8_t RightAscensionChipSelectPin = 4;
 const uint8_t DeclinationChipSelectPin = 5;
 
 
-const uint32_t TrackingMicroSecondsDelay = 126562;
+const uint32_t TrackingMicroSecondsDelay = 29562*3;
 const float ArcSecondsPerStep = 0.126562;
 
 
@@ -106,6 +106,12 @@ void makeTrackingStep(){
  
   RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
   RightAscensionStepperDriver.step();
+  delayMicroseconds(10);
+  RightAscensionStepperDriver.step();
+  delayMicroseconds(10);
+  RightAscensionStepperDriver.step();
+  delayMicroseconds(10);
+
 }
 
 
