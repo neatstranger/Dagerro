@@ -1,4 +1,4 @@
-# OpenMount
+# Astrophotography
 Why should I have to pay money for Astrophotography?
 
 
