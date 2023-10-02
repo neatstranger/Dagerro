@@ -1,3 +1,4 @@
 fswebcam -r 1280x720 --no-banner /images/image1.jpg
 raspistill -h 3040 -w 4056 -ss 500000 -o ~/Desktop/test.jpg
 raspistill -ts -o ~/Desktop/%dISO400SS1.jpg --timeout 0 --verbose --shutter 1000000 --ISO 400 --mode 3 --exposure verylong --glcapture --metering backlit
+raspistill -ts -o ~/Desktop/test.jpg --timeout 0 --verbose --shutter 1000000 --ISO 800 --mode 3 --exposure verylong --glcapture --metering backlit

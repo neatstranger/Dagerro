@@ -1,24 +1,28 @@
 #include <SPI.h>
 #include <DRV8434S.h>
+#include <DS3231.h>
 
-//Definiitions
-//Polar Axis == Right Ascension
-//Other axis == Declination
-
-const uint8_t RightAscensionChipSelectPin = 4;
-const uint8_t DeclinationChipSelectPin = 5;
-
-
-const uint32_t TrackingMicroSecondsDelay = 126562;
-const float ArcSecondsPerStep = 0.126562;
-
-
+DS3231 RTC;
 DRV8434S RightAscensionStepperDriver;
 DRV8434S DeclinationStepperDriver;
 
-uint32_t LastTimeCheckpoint = 0;
-uint32_t ElapsedTime = 0;
-uint32_t Now = 0;
+
+const uint8_t RightAscensionChipSelectPin = 4;
+const uint8_t DeclinationChipSelectPin = 5;
+const uint8_t interruptPin = 2;
+
+const float ArcSecondsPerStep = 0.126562;
+
+
+const uint32_t smallInterruptCountPerCycle = 16588;
+const uint8_t smallInterruptMaxCycles = 60;
+
+const uint32_t largeInterruptCountPerCycle = 16590;
+const uint8_t largeInterruptMaxCycles = 40;
+
+uint8_t currentCycle = 0;
+uint32_t currentInterruptCount = 0;
+
 
 String MovementCommand = "";
 bool CommandFinishedReceiving = false;
@@ -34,17 +38,18 @@ bool DeclinationReverseEnabled = true;
 
 void setup(){
   Serial.begin(115200);
-  Serial.println("Mount is initializing");
-  MovementCommand.reserve(200);
-
-
+  Wire.begin();
   SPI.begin();
-  RightAscensionStepperDriver.setChipSelectPin(RightAscensionChipSelectPin);
-  DeclinationStepperDriver.setChipSelectPin(DeclinationChipSelectPin);
-  
-    
   delay(1);
 
+  Serial.println("Mount is initializing");
+  MovementCommand.reserve(200);
+  RTC.enable32kHz(true);
+  RightAscensionStepperDriver.setChipSelectPin(RightAscensionChipSelectPin);
+  DeclinationStepperDriver.setChipSelectPin(DeclinationChipSelectPin);
+  pinMode(interruptPin, INPUT);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), countCycles, CHANGE);
+  delay(1);
 
   RightAscensionStepperDriver.resetSettings();
   RightAscensionStepperDriver.clearFaults();
@@ -69,11 +74,9 @@ void setup(){
   Serial.println("Motor output enabled.");
 
 
-  RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep256);
-  DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep256);
+  RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
+  DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
 
-
-  LastTimeCheckpoint = 0;
   Serial.println("Mount initialization complete.");
 }
 
@@ -82,15 +85,6 @@ void setup(){
 
 
 void loop(){
-  Now = micros();
-  ElapsedTime += Now-LastTimeCheckpoint;
-  LastTimeCheckpoint = Now;
-  if (ElapsedTime >= TrackingMicroSecondsDelay){
-    ElapsedTime = 0;
-    makeTrackingStep();
-  }
-
-  
   if (CommandFinishedReceiving) {
     executeCommand(MovementCommand);
     clearCommand();
@@ -98,12 +92,24 @@ void loop(){
   
 }
 
-
+void countCycles(){
+  currentInterruptCount++;
+  if(currentCycle < 60 && currentInterruptCount == smallInterruptCountPerCycle){
+    makeTrackingStep();
+    currentCycle++; 
+    currentInterruptCount = 0;
+  }else if(currentCycle >=60 && currentCycle < 100 && currentInterruptCount == largeInterruptCountPerCycle){
+    makeTrackingStep();
+    currentCycle++;
+    currentInterruptCount = 0;
+  }else{
+    currentCycle = 0;
+  }
+}
 
 
 
 void makeTrackingStep(){
- 
   RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
   RightAscensionStepperDriver.step();
 }
@@ -148,7 +154,6 @@ void executeCommand(String command){
   
   Serial.println("Starting RA Movement");
   RightAscensionStepperDriver.setDirection(RightAscensionDirection);
-  
   for ( long i = 0; i < RightAscensionSteps; i++){
     RightAscensionStepperDriver.step();
     delayMicroseconds(10);
