@@ -23,7 +23,7 @@ uint32_t Now = 0;
 String MovementCommand = "";
 bool CommandFinishedReceiving = false;
 
-bool RightAscensionReverseEnabled = false;
+bool RightAscensionReverseEnabled = true;
 bool DeclinationReverseEnabled = true;
 
 
