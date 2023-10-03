@@ -1,2 +1,2 @@
-# Astrophotography
-I am on a mission to open source the entire workflow of taking deep sky images. WIP.
+# Dagerro
+>The first known attempt at astronomical photography was by Louis Jacques Mandé Daguerre, inventor of the daguerreotype process which bears his name, who attempted in 1839 to photograph the Moon. Tracking errors in guiding the telescope during the long exposure meant the photograph came out as an indistinct fuzzy spot. [Source](https://en.wikipedia.org/wiki/Astrophotography#:~:text=The%20first%20known%20attempt%20at,as%20an%20indistinct%20fuzzy%20spot.)
