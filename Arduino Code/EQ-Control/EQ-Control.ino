@@ -30,6 +30,8 @@ bool CommandFinishedReceiving = false;
 bool RightAscensionReverseEnabled = true;
 bool DeclinationReverseEnabled = true;
 
+bool TakingAdjustmentSteps = false;
+
 
 
 
@@ -93,18 +95,21 @@ void loop(){
 }
 
 void countCycles(){
-  currentInterruptCount++;
-  if(currentCycle < 60 && currentInterruptCount == smallInterruptCountPerCycle){
-    makeTrackingStep();
-    currentCycle++; 
-    currentInterruptCount = 0;
-  }else if(currentCycle >=60 && currentCycle < 100 && currentInterruptCount == largeInterruptCountPerCycle){
-    makeTrackingStep();
-    currentCycle++;
-    currentInterruptCount = 0;
-  }else{
-    currentCycle = 0;
-  }
+  if(!TakingAdjustmentSteps){
+      currentInterruptCount++;
+    if(currentCycle < 60 && currentInterruptCount == smallInterruptCountPerCycle){
+      makeTrackingStep();
+      currentCycle++; 
+      currentInterruptCount = 0;
+    }else if(currentCycle >=60 && currentCycle < 100 && currentInterruptCount == largeInterruptCountPerCycle){
+      makeTrackingStep();
+      currentCycle++;
+      currentInterruptCount = 0;
+    }else{
+      currentCycle = 0;
+    }
+
+    }
 }
 
 
@@ -133,6 +138,7 @@ void serialEvent() {
 
 
 void executeCommand(String command){
+  TakingAdjustmentSteps = true;
   int DeclinationIndex = command.indexOf(";");
 
   String RightAscensionMovementText = command.substring(0, DeclinationIndex);
@@ -168,6 +174,10 @@ void executeCommand(String command){
     delayMicroseconds(10);
   }
   Serial.println("Finished DEC Movement");
+  TakingAdjustmentSteps = false;
+  currentCycle = 0;
+  currentInterruptCount = 0;
+
 }
 
 
