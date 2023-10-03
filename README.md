@@ -1,6 +1,7 @@
 # Astrophotography
 Why should I have to pay money for Astrophotography?
 
+The project is currently under development. I am working on building and testing each of the individual components.
 
 # Arduino/Stepper Control Board
 [Schematic_Motor Driver_2023-10-02.pdf](https://github.com/neatstranger/OpenMount/files/12786717/Schematic_Motor.Driver_2023-10-02.pdf)
