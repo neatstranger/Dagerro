@@ -138,7 +138,7 @@ void serialEvent() {
 
 
 void executeCommand(String command){
-  TakingAdjustmentSteps = true;
+  noInterrupts();
   int DeclinationIndex = command.indexOf(";");
 
   String RightAscensionMovementText = command.substring(0, DeclinationIndex);
@@ -174,10 +174,9 @@ void executeCommand(String command){
     delayMicroseconds(10);
   }
   Serial.println("Finished DEC Movement");
-  TakingAdjustmentSteps = false;
   currentCycle = 0;
   currentInterruptCount = 0;
-
+  interrupts();
 }
 
 
