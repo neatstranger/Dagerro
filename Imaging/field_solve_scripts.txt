@@ -2,10 +2,6 @@ solve-field --scale-units arcsecperpix --scale-low 0.627 --scale-high 0.647 --do
 
 
 
-
-
-
-
 https://nova.astrometry.net/user_images/8698779#annotated
 
 Center (RA, Dec):	(284.784, 33.343)
