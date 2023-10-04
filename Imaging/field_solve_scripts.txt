@@ -1,14 +1,5 @@
-solve-field guidedactivetest_2_1696214835.jpg -L 42 -H 100 -u arcminwidth
+solve-field --scale-units arcsecperpix --scale-low 0.627 --scale-high 0.647 --downsample 16 guidedactivetest_5_1696219267.jpg 
 
-The files are named like index-42XX.fits or index-42XX-YY.fits. XX is the “scale”, YY is the “healpix” number. 
-These are called the “4200-series” index files.
-
-You probably want to download index files whose quads are, say, 10% to 100% of the sizes of the images you want to solve.
-
-Image width = 42.6 ArcHours = 2556 Arcminutes
-10% = 4.26 Arc Hours = 255 Arcminutes
-
-255-2556 = index-4214,4215,4217,4218,4219
 
 
 
