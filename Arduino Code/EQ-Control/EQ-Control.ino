@@ -11,14 +11,14 @@ const uint8_t RightAscensionChipSelectPin = 4;
 const uint8_t DeclinationChipSelectPin = 5;
 const uint8_t interruptPin = 2;
 
-const float ArcSecondsPerStep = 0.126562;
+const float ArcSecondsPerStep = 0.253125;
 
 
-const uint32_t smallInterruptCountPerCycle = 16588;
-const uint8_t smallInterruptMaxCycles = 60;
+const uint32_t smallInterruptCountPerCycle = 1105;
+const uint8_t smallInterruptMaxCycles = 810;
 
-const uint32_t largeInterruptCountPerCycle = 16590;
-const uint8_t largeInterruptMaxCycles = 40;
+const uint32_t largeInterruptCountPerCycle = 1107;
+const uint8_t largeInterruptMaxCycles = 690;
 
 uint8_t currentCycle = 0;
 uint32_t currentInterruptCount = 0;
@@ -39,6 +39,7 @@ bool TakingAdjustmentSteps = false;
 
 
 void setup(){
+  noInterrupts();
   Serial.begin(115200);
   Wire.begin();
   SPI.begin();
@@ -78,8 +79,10 @@ void setup(){
 
   RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
   DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
+  RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
 
   Serial.println("Mount initialization complete.");
+  interrupts();
 }
 
 
@@ -95,27 +98,25 @@ void loop(){
 }
 
 void countCycles(){
-  if(!TakingAdjustmentSteps){
-      currentInterruptCount++;
-    if(currentCycle < 60 && currentInterruptCount == smallInterruptCountPerCycle){
-      makeTrackingStep();
-      currentCycle++; 
-      currentInterruptCount = 0;
-    }else if(currentCycle >=60 && currentCycle < 100 && currentInterruptCount == largeInterruptCountPerCycle){
-      makeTrackingStep();
-      currentCycle++;
-      currentInterruptCount = 0;
-    }else{
-      currentCycle = 0;
-    }
+  currentInterruptCount += 1;
+  if(currentCycle < smallInterruptMaxCycles && currentInterruptCount == smallInterruptCountPerCycle){
+    makeTrackingStep();
+    currentCycle += 1; 
+    currentInterruptCount = 0;
+  }else if(currentCycle >=smallInterruptMaxCycles && currentCycle < 100 && currentInterruptCount == largeInterruptCountPerCycle){
+    makeTrackingStep();
+    currentCycle += 1;
+    currentInterruptCount = 0;
+  }else if(currentCycle == 100){
+    currentCycle = 0;
+  }
 
-    }
+  
 }
 
 
 
 void makeTrackingStep(){
-  RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
   RightAscensionStepperDriver.step();
 }
 
@@ -164,6 +165,7 @@ void executeCommand(String command){
     RightAscensionStepperDriver.step();
     delayMicroseconds(10);
   }
+  RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
   Serial.println("Finished RA Movement");
   
 

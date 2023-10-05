@@ -57,4 +57,12 @@ I used this script, changing the values for xmult and ymult, until I got a resul
 1658880
 
 ```
-Which means that if we take a step every 1106 pulses, 1380 times, and then follow that buy taking a step every 1105 pulses 120 times. We will have taken 1500 steps in exactly 25.3125 seconds.
+Which means that if we take a step every 1105 interrupts, 810 times.
+Followed by taking a step every 1107 interrupts, 690 times. 
+We will have taken 1500 steps in exactly 25.3125 seconds. 
+
+```
+1500 Steps * 0.253125 ArcSeconds Per Step = 379.6875 ArcSeconds
+379.6875 ArcSeconds / 25.3125 Seconds
+15 ArcSeconds / Second
+```
