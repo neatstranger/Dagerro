@@ -1,5 +1,8 @@
+#Raspberry PI HQ Camera
 solve-field --scale-units arcsecperpix --scale-low 0.627 --scale-high 0.647 --downsample 16 guidedactivetest_5_1696219267.jpg 
 
+#IMX462 Arducam Sensor
+solve-field --scale-units arcsecperpix --scale-low 1.1 --scale-high 1.3 --downsample 4 
 
 
 https://nova.astrometry.net/user_images/8698779#annotated
