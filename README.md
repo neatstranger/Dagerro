@@ -10,18 +10,51 @@ The RTC(DS3231) outputs 32,768 pulses per second on the 32K pin. We attach an in
 `attachInterrupt(digitalPinToInterrupt(interruptPin), countCycles, CHANGE);`
 
 Note the use of the `CHANGE` for activation. This means that we will capture one interrupt for each rise, and one for each fall.
-Wwith our second now divided up into 65,536 segments.
-`1 Degree = 3600 Arcseconds`
+With our second now divided up into 65,536 segments.
 
-How fast do we need to move?
-- ~1 Arc Second/Second~
-- 360° every 24 Hours
-- 360° every 1440 Minutes
-- 360° every 86400 Seconds
-- 1° every 240 Sec
-- 3600 Arcsec Every 240 Sec
-- 15 ArcSeconds Every Second.
+```
+1 Degree = 60 ArcMinutes
+1 ArcMinute = 60 ArcSeconds
+1 Degree = 3600 ArcSeconds
+```
+
+How fast does the earth rotate? My previous assumption of ~1ArcSecond/Second~ is wrong. Let's do the math.
+```
+360° = 24 Hours
+15° = 1 Hour or 60 Minutes or 3600 Seconds
+1° or 3600 ArcSeconds = 4 Minutes or 240 Seconds
+Math = 3600(ArcSeconds-Angle)/240 (Seconds-Time)
+15 ArcSeconds(Angle) = 1 Second(Time)
+
+```
 
 
 The arduino receive exactly 1,658,880 pulses every 25.3125 seconds.
 During this period of time, we need to take exactly 1500 steps.
+
+
+python function to solve the problem.
+
+```
+x = 1
+maxcount = 1500
+xmult = 1105
+ymult = 1107
+
+while x <= maxcount:
+    y = maxcount - x
+    if (xmult*x)+(ymult*y) == 1658880:
+        print(x)
+        print(y)
+        print((xmult*x) + (ymult*y))
+    x+=1
+```
+I used this script, changing the values for xmult and ymult, until I got a result that looks like this:
+
+```
+810
+690
+1658880
+
+```
+Which means that if we take a step every 1106 pulses, 1380 times, and then follow that buy taking a step every 1105 pulses 120 times. We will have taken 1500 steps in exactly 25.3125 seconds.
