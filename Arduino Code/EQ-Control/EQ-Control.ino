@@ -76,8 +76,8 @@ void setup(){
   Serial.println("Motor output enabled.");
 
 
-  RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep16);
-  DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep16);
+  RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
+  DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
   RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
 
   Serial.println("Mount initialization complete.");
