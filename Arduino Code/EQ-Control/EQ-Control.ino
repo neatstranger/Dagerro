@@ -27,7 +27,7 @@ uint32_t currentInterruptCount = 0;
 String MovementCommand = "";
 bool CommandFinishedReceiving = false;
 
-bool RightAscensionReverseEnabled = true;
+bool RightAscensionReverseEnabled = false;
 bool DeclinationReverseEnabled = true;
 
 bool TakingAdjustmentSteps = false;
@@ -76,8 +76,8 @@ void setup(){
   Serial.println("Motor output enabled.");
 
 
-  RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
-  DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep128);
+  RightAscensionStepperDriver.setStepMode(DRV8434SStepMode::MicroStep16);
+  DeclinationStepperDriver.setStepMode(DRV8434SStepMode::MicroStep16);
   RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
 
   Serial.println("Mount initialization complete.");
