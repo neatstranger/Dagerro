@@ -68,7 +68,7 @@ void setup(){
   Serial.println("Right ascension driver SPI controle enabled");
   DeclinationStepperDriver.enableSPIDirection();
   DeclinationStepperDriver.enableSPIStep();
-  Serial.println("Declination driver SPI controle enabled");
+  Serial.println("Declination driver SPI control enabled");
 
 
   RightAscensionStepperDriver.enableDriver();
