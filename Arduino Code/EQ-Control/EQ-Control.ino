@@ -39,7 +39,6 @@ bool TakingAdjustmentSteps = false;
 
 
 void setup(){
-  noInterrupts();
   Serial.begin(115200);
   Wire.begin();
   SPI.begin();
@@ -47,7 +46,7 @@ void setup(){
 
   Serial.println("Mount is initializing");
   MovementCommand.reserve(200);
-  RTC.enable32kHz(true);
+  
   RightAscensionStepperDriver.setChipSelectPin(RightAscensionChipSelectPin);
   DeclinationStepperDriver.setChipSelectPin(DeclinationChipSelectPin);
   pinMode(interruptPin, INPUT);
@@ -82,7 +81,7 @@ void setup(){
   RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
 
   Serial.println("Mount initialization complete.");
-  interrupts();
+  RTC.enable32kHz(true);
 }
 
 
