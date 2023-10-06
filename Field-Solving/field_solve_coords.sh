@@ -17,9 +17,9 @@ read -n1 empty
 #Focusing Loop
 mkdir focus && cd focus
 echo "Taking First Focus Picture"
-cp ~/Desktop/solve_test/long6.jpg ./test.jpg # Take a new photo
+libcamera-still --shutter 5000000 --gain 8 --awbgains 1,1 -o test.jpg -n --immediate  # Take a new photo
 cancel=true
-feh --geometry 640x360 --reload 1 --scale-down --borderless test.jpg & \
+feh --geometry 1000x1000 --reload 1 --scale-down --borderless test.jpg & \
 while $cancel; do
     echo "Taking Focus Photo, Press c in 1 Sec to Cancel"
     read -n1 -t 1 input 
@@ -28,7 +28,7 @@ while $cancel; do
     fi
     current_time=$(date +%s)
     cp test.jpg "$current_time".jpg #Save the Current Image to It's Timestamp
-    cp ~/Desktop/solve_test/long10.jpg ./test.jpg #Photo Taking Line
+    libcamera-still --shutter 5000000 --gain 8 --awbgains 1,1 --immediate -o test.jpg -n --immediate  # Take a new photo
 done
 
 
