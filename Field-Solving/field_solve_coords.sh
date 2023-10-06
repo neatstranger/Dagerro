@@ -31,8 +31,8 @@ while $cancel; do
     libcamera-still --shutter 5000000 --gain 8 --awbgains 1,1 --immediate -o test.jpg -n --immediate  # Take a new photo
 done
 
-
-echo "Now we need to field solve an image tofigure out where we are currently pointing."
+cd focus
+echo "Now we need to field solve an image to figure out where we are currently pointing."
 echo "Using last focus image"
 mkdir ../field_solve
 cp test.jpg ../field_solve/
@@ -51,6 +51,8 @@ declination_angle="${declination_angle:7:-1}"
 echo "RA: $right_ascension_angle, DEC: $declination_angle"
 
 
+#Andromeda = RA 0.73°, DEC 41.270694
+#RA: 335.12370958, DEC: 18.95620026
 # #Take a Picture
 # libcamera-still --shutter 500000 --gain 
 
