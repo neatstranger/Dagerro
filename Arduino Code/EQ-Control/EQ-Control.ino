@@ -28,7 +28,7 @@ String MovementCommand = "";
 bool CommandFinishedReceiving = false;
 
 bool RightAscensionReverseEnabled = false;
-bool DeclinationReverseEnabled = true;
+bool DeclinationReverseEnabled = false;
 
 bool TakingAdjustmentSteps = false;
 
