@@ -157,9 +157,9 @@ void executeCommand(String command){
   long DeclinationMovement = DeclinationMovementText.toInt();
   
   bool RightAscensionDirection = RightAscensionMovement > 0;
-  if(!RightAscensionReverseEnabled){RightAscensionDirection = !RightAscensionDirection;}
+  if(!RightAscensionReverseEnabled){RightAscensionDirection = RightAscensionDirection;}
   bool DeclinationDirection = DeclinationMovement > 0;
-  if(!DeclinationReverseEnabled){DeclinationDirection = !DeclinationDirection;}
+  if(!DeclinationReverseEnabled){DeclinationDirection = DeclinationDirection;}
 
   RightAscensionMovement = abs(RightAscensionMovement);
   DeclinationMovement = abs(DeclinationMovement);
