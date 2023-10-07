@@ -1,0 +1,162 @@
+Goal:#RA: 335.12370958, DEC: 18.95620026
+
+RA: 319.87329584, DEC: 30.399084977
+
+
+RA: 281.03043145, DEC: 46.310255282
+
+
+
+crpix0 1382.77075195
+crpix1 593.494171143
+crval0 333.25821324
+crval1 63.1744351772
+ra_tangent 333.25821324
+dec_tangent 63.1744351772
+pixx_tangent 1382.77075195
+pixy_tangent 593.494171143
+imagew 1920
+imageh 1080
+cd11 -0.000105481712117
+cd12 0.000314577579815
+cd21 -0.000313796543453
+cd22 -0.000105681981871
+det 1.09860873581e-07
+parity 1
+pixscale 1.19322961814
+orientation 108.57481
+ra_center 333.320291793
+dec_center 63.3125072003
+orientation_center 108.6302
+ra_center_h 22
+ra_center_m 13
+ra_center_s 16.8700304369
+dec_center_sign 1
+dec_center_d 63
+dec_center_m 18
+dec_center_s 45.0259210752
+ra_center_hms 22:13:16.870
+dec_center_dms +63:18:45.026
+ra_center_merc 0.9258897
+dec_center_merc 0.72900282
+fieldarea 0.227808
+fieldw 38.12
+fieldh 21.46
+fieldunits arcminutes
+decmin 62.954
+decmax 63.6706
+ramin 332.721
+ramax 333.928
+ra_min_merc 0.927578
+ra_max_merc 0.924226
+dec_min_merc 0.731231
+dec_max_merc 0.726799
+merc_diff 0.00443207
+merczoom 8
+
+
+------
+0;32400
+0;32400
+-108000;0
+
+
+
+
+_______________________
+crpix0 900.809555054
+crpix1 285.625141144
+crval0 354.083877281
+crval1 43.3258610431
+ra_tangent 354.083877281
+dec_tangent 43.3258610431
+pixx_tangent 900.809555054
+pixy_tangent 285.625141144
+imagew 1920
+imageh 1080
+cd11 -5.86295813371e-05
+cd12 0.000326581826497
+cd21 -0.000326054161664
+cd22 -5.78721026156e-05
+det 1.09876380801e-07
+parity 1
+pixscale 1.19331382929
+orientation 100.12123
+ra_center 354.193417743
+dec_center 43.2914556968
+orientation_center 100.19639
+ra_center_h 23
+ra_center_m 36
+ra_center_s 46.4202583154
+dec_center_sign 1
+dec_center_d 43
+dec_center_m 17
+dec_center_s 29.2405084007
+ra_center_hms 23:36:46.420
+dec_center_dms +43:17:29.241
+ra_center_merc 0.9838706
+dec_center_merc 0.63366033
+fieldarea 0.22784
+fieldw 38.15
+fieldh 21.5
+fieldunits arcminutes
+decmin 42.9458
+decmax 43.6356
+ramin 353.874
+ramax 354.515
+ra_min_merc 0.984763
+ra_max_merc 0.982984
+dec_min_merc 0.634978
+dec_max_merc 0.632345
+merc_diff 0.00263277
+merczoom 9
+
+
+-10800;32400
+
+crpix0 925.121276855
+crpix1 579.109367371
+crval0 355.308506186
+crval1 34.3929525729
+ra_tangent 355.308506186
+dec_tangent 34.3929525729
+pixx_tangent 925.121276855
+pixy_tangent 579.109367371
+imagew 1920
+imageh 1080
+cd11 -5.20862234737e-05
+cd12 0.000326863006352
+cd21 -0.000327039170316
+cd22 -5.27247107783e-05
+det 1.09643237473e-07
+parity 1
+pixscale 1.19204712895
+orientation 99.106217
+ra_center 355.290980541
+dec_center 34.3834163462
+orientation_center 99.096317
+ra_center_h 23
+ra_center_m 41
+ra_center_s 9.83532977121
+dec_center_sign 1
+dec_center_d 34
+dec_center_m 23
+dec_center_s 0.298846198602
+ra_center_hms 23:41:09.835
+dec_center_dms +34:23:00.299
+ra_center_merc 0.98691939
+dec_center_merc 0.60181911
+fieldarea 0.227356
+fieldw 38.15
+fieldh 21.46
+fieldunits arcminutes
+decmin 34.0411
+decmax 34.726
+ramin 355.017
+ramax 355.566
+ra_min_merc 0.987683
+ra_max_merc 0.986158
+dec_min_merc 0.602974
+dec_max_merc 0.600669
+merc_diff 0.00230525
+merczoom 9
