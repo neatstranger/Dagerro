@@ -32,6 +32,13 @@ bool DeclinationReverseEnabled = false;
 
 bool TakingAdjustmentSteps = false;
 
+int RightAscensionStandbyCurrent = 250;
+int RightAscensionSlewingCurrent = 2000;
+
+int DeclinationStandbyCurrent = 250;
+int DeclinationSlewingCurrent = 2000;
+
+
 
 
 
@@ -55,11 +62,11 @@ void setup(){
 
   RightAscensionStepperDriver.resetSettings();
   RightAscensionStepperDriver.clearFaults();
-  RightAscensionStepperDriver.setCurrentMilliamps(2000);
+  RightAscensionStepperDriver.setCurrentMilliamps(RightAscensionStandbyCurrent);
   Serial.println("Right Driver Ascension Reset, Faults Cleared, Max Current Set");
   DeclinationStepperDriver.resetSettings();
   DeclinationStepperDriver.clearFaults();
-  DeclinationStepperDriver.setCurrentMilliamps(2000);
+  DeclinationStepperDriver.setCurrentMilliamps(DeclinationStandbyCurrent);
   Serial.println("Declination Driver Reset, Faults Cleared, Max Current Set");
 
 
@@ -117,6 +124,8 @@ void countCycles(){
 
 void makeTrackingStep(){
   RightAscensionStepperDriver.step();
+  
+
 }
 
 
@@ -159,21 +168,25 @@ void executeCommand(String command){
   long DeclinationSteps = arcSecondsToSteps(DeclinationMovement);
   
   Serial.println("Starting RA Movement");
+  RightAscensionStepperDriver.setCurrentMilliamps(RightAscensionSlewingCurrent);
   RightAscensionStepperDriver.setDirection(RightAscensionDirection);
   for ( long i = 0; i < RightAscensionSteps; i++){
     RightAscensionStepperDriver.step();
     delayMicroseconds(10);
   }
   RightAscensionStepperDriver.setDirection(RightAscensionReverseEnabled);
+  RightAscensionStepperDriver.setCurrentMilliamps(RightAscensionStandbyCurrent);
   Serial.println("Finished RA Movement");
   
 
   Serial.println("Starting DEC Movement");
+  DeclinationStepperDriver.setCurrentMilliamps(DeclinationSlewingCurrent);
   DeclinationStepperDriver.setDirection(DeclinationDirection);
   for (long i = 0; i < DeclinationSteps; i++){
     DeclinationStepperDriver.step();
     delayMicroseconds(10);
   }
+  DeclinationStepperDriver.setCurrentMilliamps(DeclinationStandbyCurrent);
   Serial.println("Finished DEC Movement");
   currentCycle = 0;
   currentInterruptCount = 0;
