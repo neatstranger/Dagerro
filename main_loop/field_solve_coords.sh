@@ -30,17 +30,40 @@ while $cancel; do
     libcamera-still --shutter 5000000 --gain 8 --awbgains 1,1 --immediate -o test.jpg -n --immediate  # Take a new photo
 done
 
-#Field Solving
-echo "Now we need to field solve an image to figure out where we are currently pointing."
-echo "Using last focus image"
-mkdir ../field_solve
-cp test.jpg ../field_solve/
-cd ../field_solve
-solve-field --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O test.jpg > solve_log.txt
-echo "Field Solved" 
-echo "Exporing Coordinates of Current Location"
-get-wcs test.wcs | grep crval1  >> coords.txt
-get-wcs test.wcs | grep crval2  >> coords.txt
+goal_ra=335.12370958
+goal_dec=18.95620026
+
+mkdir ../capture_and_guide && cd ../capture_and_guide
+mkdir captures && mkdir solves
+cd solves
+
+
+
+echo "Capturing Image...Please Wait"
+cp "../captures/1.jpg" "../captures/image.jpg"
+feh --geometry 1000x1000 --reload 1 --scale-down --borderless ../captures/image.jpg
+start_time=$(date +%s)
+cp "../captures/image.jpg" "../captures/$start_time.jpg"
+solve-field --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
+get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
+get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
+./home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/move_mount.py -r 335.12370958 -d 18.95620026 -c "./$start_time.txt" -o "../moves.csv"
+
+
+
+# #Field Solving
+# echo "Now we need to field solve an image to figure out where we are currently pointing."
+# echo "Using last focus image"
+# mkdir ../field_solve
+# cp test.jpg ../field_solve/
+# cd ../field_solve
+# solve-field --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O test.jpg > solve_log.txt
+# echo "Field Solved" 
+# echo "Exporing Coordinates of Current Location"
+# get-wcs test.wcs | grep crval1  >> coords.txt
+# get-wcs test.wcs | grep crval2  >> coords.txt
+
+
 
 
 

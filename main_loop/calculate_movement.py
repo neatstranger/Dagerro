@@ -1,13 +1,15 @@
 import argparse
+import csv
 
 def setupArgParser():
     parser = argparse.ArgumentParser(description="Calculate Difference Between Current Location and Destination", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-r', '--ra', type=float, help='Right Ascension of Destination', required=True)
     parser.add_argument('-d', '--dec', type=float, help='Declination of Destination', required=True)
     parser.add_argument('-c', '--coords-file', type=str, help='Current Location Coords.TXT File', required=True)
+    parser.add_argument('-o', '--output-file', type=str, help="Where to put the output csv file.")
     args = parser.parse_args()
     config = vars(args)
-    return config['ra'], config['dec'], config['coords_file']
+    return config['ra'], config['dec'], config['coords_file'], config['output-file']
 
 def getCurrentLocation(coords_file):
     lines = []
@@ -26,14 +28,18 @@ def calculateMovement(current_ra, dest_ra, current_dec, dest_dec):
 def calculateArcSeconds(degrees):
     return degrees * 3600
 
+def updateCSVFile(fileLocation, ra_arcseconds, dec_arcseconds):
+    with open(fileLocation, 'a', newline='\n') as output:
+        writer = csv.writer(output, delimiter=',')
+        writer.writerow([ra_arcseconds, dec_arcseconds, 'false'])
+
 def main():
-    dest_ra, dest_dec, coords_file = setupArgParser()
+    dest_ra, dest_dec, coords_file, output_file = setupArgParser()
     current_ra, current_dec = getCurrentLocation(coords_file)
     ra_diff_degrees, dec_diff_degrees = calculateMovement(current_ra, dest_ra, current_dec, dest_dec)
     ra_diff_arcseconds = calculateArcSeconds(ra_diff_degrees)
     dec_diff_arcseconds = calculateArcSeconds(dec_diff_degrees)
-    print("RA Difference: " + str(ra_diff_degrees) + " degrees")
-    print("Dec Difference: " + str(dec_diff_degrees) + " degrees")
+    updateCSVFile(output_file, ra_diff_arcseconds, dec_diff_arcseconds)
 
 if __name__ == '__main__':
     main()
