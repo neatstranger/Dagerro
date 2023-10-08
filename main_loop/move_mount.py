@@ -61,10 +61,12 @@ def main():
     except:
         print("Could Not Start Serial Port, Please Check Connection and Try again")
         exit()
+    time.sleep(1)
     serialGetData(mount)
     while True:
         ra, dec = getMovmentCommand(move_file)
-        sendSerialMovement(ra, dec, mount)
+        if(ra != None or dec != None):
+            sendSerialMovement(ra, dec, mount)
         time.sleep(1)
 
 
