@@ -30,6 +30,7 @@ while $cancel; do
     libcamera-still --shutter 5000000 --gain 8 --awbgains 1,1 --immediate -o test.jpg -n --immediate  # Take a new photo
 done
 
+#Field Solving
 echo "Now we need to field solve an image to figure out where we are currently pointing."
 echo "Using last focus image"
 mkdir ../field_solve
@@ -42,23 +43,5 @@ get-wcs test.wcs | grep crval1  >> coords.txt
 get-wcs test.wcs | grep crval2  >> coords.txt
 
 
-#Output of this will look something like this:
-#crval1 = 335.12370958
-#crval2 = 18.95620026
-
-
 
 #Andromeda:RA: 335.12370958, DEC: 18.95620026
-
-
-#Andromeda = RA 0.73°, DEC 41.270694
-#RA: 335.12370958, DEC: 18.95620026
-# #Take a Picture
-# libcamera-still --shutter 500000 --gain 
-
-# #Field Solve Picture
-
-
-# #export coordinates
-
-# #Move Telescope?
