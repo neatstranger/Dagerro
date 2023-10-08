@@ -14,14 +14,14 @@ const uint8_t interruptPin = 2;
 const float ArcSecondsPerStep = 0.253125;
 
 
-const uint32_t smallInterruptCountPerCycle = 1105;
-const uint8_t smallInterruptMaxCycles = 810;
+const int smallInterruptCountPerCycle = 1105;
+const int smallInterruptMaxCycles = 810;
 
-const uint32_t largeInterruptCountPerCycle = 1107;
-const uint8_t largeInterruptMaxCycles = 690;
+const int largeInterruptCountPerCycle = 1107;
+const int maxInterruptCycles = 1500;
 
-uint8_t currentCycle = 0;
-uint32_t currentInterruptCount = 0;
+int currentCycle = 0;
+int currentInterruptCount = 0;
 
 
 String MovementCommand = "";
@@ -32,14 +32,11 @@ bool DeclinationReverseEnabled = false;
 
 bool TakingAdjustmentSteps = false;
 
-int RightAscensionStandbyCurrent = 2000;
+int RightAscensionStandbyCurrent = 1500;
 int RightAscensionSlewingCurrent = 2000;
 
-int DeclinationStandbyCurrent = 250;
+int DeclinationStandbyCurrent = 500;
 int DeclinationSlewingCurrent = 2000;
-
-
-
 
 
 
@@ -103,18 +100,23 @@ void loop(){
   
 }
 
+
+
+
 void countCycles(){
   currentInterruptCount += 1;
   if(currentCycle < smallInterruptMaxCycles && currentInterruptCount == smallInterruptCountPerCycle){
     makeTrackingStep();
     currentCycle += 1; 
     currentInterruptCount = 0;
-  }else if(currentCycle >=smallInterruptMaxCycles && currentCycle < 100 && currentInterruptCount == largeInterruptCountPerCycle){
+  }else if(currentCycle >=smallInterruptMaxCycles && currentCycle < maxInterruptCycles && currentInterruptCount == largeInterruptCountPerCycle){
     makeTrackingStep();
     currentCycle += 1;
     currentInterruptCount = 0;
-  }else if(currentCycle == 100){
+  }
+  if(currentCycle == maxInterruptCycles){
     currentCycle = 0;
+    Serial.println("Cycle Reset");
   }
 
   
@@ -124,7 +126,6 @@ void countCycles(){
 
 void makeTrackingStep(){
   RightAscensionStepperDriver.step();
-  
 
 }
 
