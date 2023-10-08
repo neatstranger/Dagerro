@@ -9,7 +9,7 @@ def setupArgParser():
     parser.add_argument('-o', '--output-file', type=str, help="Where to put the output csv file.")
     args = parser.parse_args()
     config = vars(args)
-    return config['ra'], config['dec'], config['coords_file'], config['output-file']
+    return config['ra'], config['dec'], config['coords_file'], config['output_file']
 
 def getCurrentLocation(coords_file):
     lines = []
