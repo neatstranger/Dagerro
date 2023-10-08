@@ -36,7 +36,7 @@ echo "Using last focus image"
 mkdir ../field_solve
 cp test.jpg ../field_solve/
 cd ../field_solve
-solve-field --scale-units arcsecperpix --scale-low 1.1 --scale-high 1.3 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O test.jpg > solve_log.txt
+solve-field --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O test.jpg > solve_log.txt
 echo "Field Solved" 
 echo "Exporing Coordinates of Current Location"
 get-wcs test.wcs | grep crval1  >> coords.txt
