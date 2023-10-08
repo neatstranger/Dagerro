@@ -47,8 +47,8 @@ def getMovmentCommand(file_location):
         for line in csv_reader:
             last_line = line
     if last_line[2] == 'false':
-        ra_movement = int(last_line[0])
-        dec_movement = int(last_line[1])
+        ra_movement = float(last_line[0])
+        dec_movement = float(last_line[1])
         updateCSVFile(file_location, ra_movement, dec_movement)
     return ra_movement, dec_movement
     
