@@ -40,8 +40,8 @@ cd solves
 
 
 echo "Capturing Image...Please Wait"
-cp "../1.jpg" "../captures/image.jpg"
-feh --geometry 1000x1000 --reload 1 --scale-down --borderless ../captures/image.jpg
+cp "../1.jpg" "../captures/image.jpg" #Take a new image
+sleep 2
 start_time=$(date +%s)
 cp "../captures/image.jpg" "../captures/$start_time.jpg"
 solve-field --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
@@ -49,8 +49,29 @@ get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
 get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
 /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv"
 
+feh --geometry 1000x1000 --reload 1 --scale-down --borderless ../captures/image.jpg & \
+/home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/move_mount.py -f "../moves.csv" -s "/dev/ttyACM0" -b 115200 & \
+while true; do
+    echo "Taking Photo"
+    cp "../2.jpg" "../captures/image.jpg"
+    sleep 2
+    start_time=$(date +%s)
+    cp "../captures/image.jpg" "../captures/$start_time.jpg"
+    solve-field --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
+    get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
+    get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
+    /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv"
 
-
+    echo "Taking Photo"
+    cp "../3.jpg" "../captures/image.jpg"
+    sleep 2
+    start_time=$(date +%s)
+    cp "../captures/image.jpg" "../captures/$start_time.jpg"
+    solve-field --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
+    get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
+    get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
+    /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv"
+done
 # #Field Solving
 # echo "Now we need to field solve an image to figure out where we are currently pointing."
 # echo "Using last focus image"

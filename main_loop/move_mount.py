@@ -31,7 +31,7 @@ def setupArgParser():
     parser.add_argument('-b', '--baudrate', type=int, help="Serial port baud rate")
     args = parser.parse_args()
     config = vars(args)
-    return config['movement-file'], config['--serial-port'], config['baudrate']
+    return config['movement_file'], config['--serial_port'], config['baudrate']
 
 def updateCSVFile(fileLocation, ra_arcseconds, dec_arcseconds):
     with open(fileLocation, 'a', newline='\n') as output:
