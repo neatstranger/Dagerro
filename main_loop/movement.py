@@ -1,18 +1,5 @@
 import argparse
 
-def main():
-    dest_ra, dest_dec, coords_file = setupArgParser()
-    current_ra, current_dec = getCurrentLocation(coords_file)
-    ra_diff_degrees, dec_diff_degrees = calculateMovement(current_ra, dest_ra, current_dec, dest_dec)
-    ra_diff_arcseconds = calculateArcSeconds(ra_diff_degrees)
-    dec_diff_arcseconds = calculateArcSeconds(dec_diff_degrees)
-    print("RA Difference: " + str(ra_diff_degrees) + " degrees")
-    print("Dec Difference: " + str(ra_diff_degrees) + " degrees")
-
-if __name__ == '__main__':
-    main()
-
-
 def setupArgParser():
     parser = argparse.ArgumentParser(description="Calculate Difference Between Current Location and Destination", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-r', '--ra', type=float, help='Right Ascension of Destination', required=True)
@@ -38,3 +25,15 @@ def calculateMovement(current_ra, dest_ra, current_dec, dest_dec):
 
 def calculateArcSeconds(degrees):
     return degrees * 3600
+
+def main():
+    dest_ra, dest_dec, coords_file = setupArgParser()
+    current_ra, current_dec = getCurrentLocation(coords_file)
+    ra_diff_degrees, dec_diff_degrees = calculateMovement(current_ra, dest_ra, current_dec, dest_dec)
+    ra_diff_arcseconds = calculateArcSeconds(ra_diff_degrees)
+    dec_diff_arcseconds = calculateArcSeconds(dec_diff_degrees)
+    print("RA Difference: " + str(ra_diff_degrees) + " degrees")
+    print("Dec Difference: " + str(ra_diff_degrees) + " degrees")
+
+if __name__ == '__main__':
+    main()
