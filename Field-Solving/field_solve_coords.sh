@@ -4,8 +4,7 @@
 cd ~/Desktop/
 
 echo "Setting up and changing into directories."
-start_time=test
-#start_time=$(date +%s)
+start_time=$(date +%s)
 mkdir $start_time && cd $start_time
 
 
@@ -31,7 +30,6 @@ while $cancel; do
     libcamera-still --shutter 5000000 --gain 8 --awbgains 1,1 --immediate -o test.jpg -n --immediate  # Take a new photo
 done
 
-cd focus
 echo "Now we need to field solve an image to figure out where we are currently pointing."
 echo "Using last focus image"
 mkdir ../field_solve
@@ -44,11 +42,13 @@ get-wcs test.wcs | grep crval1  >> coords.txt
 get-wcs test.wcs | grep crval2  >> coords.txt
 
 
-right_ascension_angle=$(get-wcs test.wcs | grep  "crval1 ")
-right_ascension_angle="${right_ascension_angle:7:-1}"
-declination_angle=$(get-wcs test.wcs | grep  "crval2 ")
-declination_angle="${declination_angle:7:-1}"
-echo "RA: $right_ascension_angle, DEC: $declination_angle"
+#Output of this will look something like this:
+#crval1 = 335.12370958
+#crval2 = 18.95620026
+
+
+
+#Andromeda:RA: 335.12370958, DEC: 18.95620026
 
 
 #Andromeda = RA 0.73°, DEC 41.270694
