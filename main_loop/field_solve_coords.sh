@@ -40,14 +40,14 @@ cd solves
 
 
 echo "Capturing Image...Please Wait"
-cp "../captures/1.jpg" "../captures/image.jpg"
+cp "../1.jpg" "../captures/image.jpg"
 feh --geometry 1000x1000 --reload 1 --scale-down --borderless ../captures/image.jpg
 start_time=$(date +%s)
 cp "../captures/image.jpg" "../captures/$start_time.jpg"
 solve-field --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
 get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
 get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
-./home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/move_mount.py -r 335.12370958 -d 18.95620026 -c "./$start_time.txt" -o "../moves.csv"
+/home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/move_mount.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv"
 
 
 
