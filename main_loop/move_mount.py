@@ -64,7 +64,7 @@ def main():
     serialGetData(mount)
     while True:
         ra, dec = getMovmentCommand(move_file)
-        sendSerialMovement(ra, dec)
+        sendSerialMovement(ra, dec, mount)
         time.sleep(1)
 
 
