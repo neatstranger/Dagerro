@@ -33,7 +33,7 @@ def main():
     ra_diff_arcseconds = calculateArcSeconds(ra_diff_degrees)
     dec_diff_arcseconds = calculateArcSeconds(dec_diff_degrees)
     print("RA Difference: " + str(ra_diff_degrees) + " degrees")
-    print("Dec Difference: " + str(ra_diff_degrees) + " degrees")
+    print("Dec Difference: " + str(dec_diff_degrees) + " degrees")
 
 if __name__ == '__main__':
     main()
