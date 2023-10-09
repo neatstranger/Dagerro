@@ -1,7 +1,7 @@
 #!/bin/bash
-#Andromeda
-goal_ra=335.12370958
-goal_dec=18.95620026
+#M56
+goal_ra=289.0125000
+goal_dec=30.188
 
 #Go to Desktop Directory
 cd ~/Desktop/
