@@ -26,7 +26,7 @@ def sendSerialMovement(ra, dec, mount):
 
 def setupArgParser():
     parser = argparse.ArgumentParser(description="Look at a csv file and move according to that.", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-f', '--movement-file', type=str, help='CSV File With Moves', required=True)
+    parser.add_argument('-f', '--movement-file', type=str, help='CSV File With Moves')
     parser.add_argument('-s', '--serial-port', type=str, help='Serial Port to Connect to Mount', required=True)
     parser.add_argument('-b', '--baudrate', type=int, help="Serial port baud rate")
     args = parser.parse_args()
