@@ -67,6 +67,8 @@ def main():
         ra, dec = getMovmentCommand(move_file)
         if(ra != None or dec != None):
             sendSerialMovement(ra, dec, mount)
+        else:
+            serialGetData(mount)
         time.sleep(1)
 
 
