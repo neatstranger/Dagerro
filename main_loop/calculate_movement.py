@@ -7,7 +7,7 @@ def setupArgParser():
     parser.add_argument('-d', '--dec', type=float, help='Declination of Destination', required=True)
     parser.add_argument('-c', '--coords-file', type=str, help='Current Location Coords.TXT File', required=True)
     parser.add_argument('-o', '--output-file', type=str, help="Where to put the output csv file.", required=False)
-    parser.add_argument('-w', '--write-to-file', type=bool, help="Should we write the output?", required=False)
+    parser.add_argument('-w', '--write-to-file', type=bool, help="Should we write the output?", required=False, action="store_true" )
     args = parser.parse_args()
     config = vars(args)
     return config['ra'], config['dec'], config['coords_file'], config['output_file'], config['write_to_file']
