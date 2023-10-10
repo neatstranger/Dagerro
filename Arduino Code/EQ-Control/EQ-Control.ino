@@ -32,7 +32,7 @@ bool DeclinationReverseEnabled = false;
 
 bool TakingAdjustmentSteps = false;
 
-int RightAscensionStandbyCurrent = 1500;
+int RightAscensionStandbyCurrent = 2000;
 int RightAscensionSlewingCurrent = 2000;
 
 int DeclinationStandbyCurrent = 500;
