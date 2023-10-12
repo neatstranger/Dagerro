@@ -7,8 +7,8 @@ DRV8434S RightAscensionStepperDriver;
 DRV8434S DeclinationStepperDriver;
 
 
-const uint8_t RightAscensionChipSelectPin = 4;
-const uint8_t DeclinationChipSelectPin = 5;
+const uint8_t RightAscensionChipSelectPin = 5;
+const uint8_t DeclinationChipSelectPin = 4;
 const uint8_t interruptPin = 2;
 
 const float ArcSecondsPerStep = 0.253125;
@@ -32,7 +32,7 @@ bool DeclinationReverseEnabled = false;
 
 bool TakingAdjustmentSteps = false;
 
-int RightAscensionStandbyCurrent = 1500;
+int RightAscensionStandbyCurrent = 2000;
 int RightAscensionSlewingCurrent = 2000;
 
 int DeclinationStandbyCurrent = 500;
