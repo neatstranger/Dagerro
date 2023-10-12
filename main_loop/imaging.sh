@@ -65,23 +65,14 @@ while $cancel; do
     start_time=$(date +%s)
     echo "Copying Newly Taken Image For Solving."
     cp "../captures/image.jpg" "../captures/$start_time.jpg"
-    if  [[ $iter -eq 5 ]];then
+    if  [[ $iter -eq 2 ]];then
         iter=0
-        echo "Would you like to solve?"
-        read -n1 solve
-        if  [[ "$solve" =~ 'y' ]];then
-            echo "Solving..."
-            solve-field --cpulimit 5 --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
-            get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
-            get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
-            echo "Calculating Expected Movement to Target"
-            /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt"
-            echo "Would you like to send these commands to the mount? y/n"
-            read -n1 input
-            if  [[ "$input" =~ 'y' ]];then
-                /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv" -w
-            fi
-        fi
+        echo "Solving..."
+        solve-field --cpulimit 5 --scale-units arcsecperpix --scale-low 1.18 --scale-high 1.20 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
+        get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
+        get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
+        echo "Calculating Expected Movement to Target"        
+        /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv" -w
     fi
     iter=$iter+1
 done
