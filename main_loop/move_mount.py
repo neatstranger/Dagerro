@@ -15,7 +15,8 @@ def serialGetData(mount):
         reading = mount.readline(100)
         all_lines.append(reading.strip(b'\r\n').decode())
     for line in all_lines:
-        print(line)
+        if line != "":
+            print(line)
 
 def sendSerialMovement(ra, dec, mount):
     command_string = str(ra)+";"+str(dec)+'\r'
@@ -74,7 +75,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-

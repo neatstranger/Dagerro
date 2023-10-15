@@ -85,7 +85,7 @@ while $cancel; do
         /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt"
         echo "Would you like to send these coordinates to the mount?"
         input=
-        read -n1 input
+        read -n1 -t 1 input
         if [[ "$input" =~ y]]; then
             /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv" -w
         fi
