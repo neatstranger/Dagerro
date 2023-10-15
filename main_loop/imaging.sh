@@ -52,6 +52,8 @@ cd solves
 #M56
 #Andromeda = RA_10.6917, DEC_41.2711
 #Triangulum Galaxy = RA_23.46825, DEC_30.661
+#Deer Lick Group = RA_339.271, 34.41975
+
 goal_ra=335.12370958
 goal_dec=18.95620026
 shutter=5000000
@@ -71,7 +73,7 @@ while $cancel; do
     echo "Capturing Image...Please Wait"
     libcamera-still --shutter $shutter --gain $gain --awbgains 1,1 --immediate -o "../captures/image.jpg" -n --immediate  # Take a new photo
     start_time=$(date +%s)
-    echo "Copying Newly Taken Image For Solving."
+    echo "Copying Newly Taken Image."
     cp "../captures/image.jpg" "../captures/$start_time.jpg"
     if  [[ $iter -eq 5 ]];then
         iter=0
@@ -80,7 +82,13 @@ while $cancel; do
         get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
         get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
         echo "Calculating Expected Movement to Target"        
-        /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv" -w
+        /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt"
+        echo "Would you like to send these coordinates to the mount?"
+        input=
+        read -n1 input
+        if [[ "$input" =~ y]]; then
+            /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv" -w
+        fi
     fi
     iter=$iter+1
 done
