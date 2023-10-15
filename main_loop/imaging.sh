@@ -40,10 +40,18 @@ mkdir ../capture_and_guide && cd ../capture_and_guide
 mkdir captures && mkdir solves
 cd solves
 
-
+#Calculate Coordinates of Destination From RA HH:MM:SS
+#((Hours * 60 * 60) + (Minutes*60)+Seconds)
+#------------------------------------------- * 15 = Conversion
+#                  3600
+#24 Hours = 360 Degrees
+#1 Hour = 15 Degrees
+#3600 Seconds = 54000
 
 #!/bin/bash
 #M56
+#Andromeda = RA_10.6917, DEC_41.2711
+#Triangulum Galaxy = RA_23.46825, DEC_30.661
 goal_ra=335.12370958
 goal_dec=18.95620026
 shutter=5000000
