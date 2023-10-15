@@ -1,8 +1,4 @@
 #!/bin/bash
-#M56
-goal_ra=289.0125000
-goal_dec=30.188
-
 #Go to Desktop Directory
 cd ~/Desktop/
 
@@ -56,8 +52,8 @@ cd solves
 
 goal_ra=335.12370958
 goal_dec=18.95620026
-shutter=5000000
-gain=7
+shutter=15000000
+gain=5
 #Starting Capture Process
 echo "Capturing Image...Please Wait"
 libcamera-still --shutter $shutter --gain $gain --awbgains 1,1 --immediate -o "../captures/image.jpg" -n --immediate  # Take a new photo
@@ -75,19 +71,24 @@ while $cancel; do
     start_time=$(date +%s)
     echo "Copying Newly Taken Image."
     cp "../captures/image.jpg" "../captures/$start_time.jpg"
-    if  [[ $iter -eq 5 ]];then
+    if  [[ $iter -eq 10 ]];then
         iter=0
-        echo "Solving..."
-        solve-field  --scale-units arcsecperpix  --scale-low 0.627 --scale-high 0.647 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
-        get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
-        get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
-        echo "Calculating Expected Movement to Target"        
-        /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt"
-        echo "Would you like to send these coordinates to the mount?"
         input=
-        read -n1 -t 1 input
-        if [[ "$input" =~ y]]; then
-            /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv" -w
+        echo "Would you like to solve?(y/n)"
+        read -n1 -t 3 input
+        if  [[ "$input" =~ 'y' ]];then
+            echo "Solving..."
+            solve-field  --scale-units arcsecperpix  --scale-low 0.627 --scale-high 0.647 --downsample 4 --match none --new-fits none --rdls none --index-xyls none -p --corr none --solved none --temp-axy -O --wcs "$start_time.wcs" "../captures/$start_time.jpg"> "$start_time.log"
+            get-wcs "$start_time.wcs" | grep crval1  >> "$start_time.txt"
+            get-wcs "$start_time.wcs" | grep crval2  >> "$start_time.txt"
+            echo "Calculating Expected Movement to Target"        
+            /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt"
+            echo "Would you like to send these coordinates to the mount?"
+            input=
+            read -n1 -t 3 input
+            if  [[ "$input" =~ 'y' ]];then
+                /home/millerad/Desktop/Dagerro/venv/bin/python /home/millerad/Desktop/Dagerro/main_loop/calculate_movement.py -r "$goal_ra" -d "$goal_dec" -c "./$start_time.txt" -o "../moves.csv" -w
+            fi
         fi
     fi
     iter=$iter+1
