@@ -52,11 +52,11 @@ cd solves
 
 goal_ra=335.12370958
 goal_dec=18.95620026
-shutter=15000000
-gain=5
+shutter=60000000
+gain=1
 #Starting Capture Process
 echo "Capturing Image...Please Wait"
-libcamera-still --shutter $shutter --gain $gain --awbgains 1,1 --immediate -o "../captures/image.jpg" -n --immediate  # Take a new photo
+libcamera-still --shutter $shutter --gain $gain --awbgains 1,1 -o "../captures/image.jpg" -n --immediate  # Take a new photo
 start_time=$(date +%s)
 echo "Copying Newly Taken Image For Solving."
 cp "../captures/image.jpg" "../captures/$start_time.jpg"
@@ -67,7 +67,7 @@ feh --geometry 1000x1000 --reload 1 --scale-down --borderless ../captures/image.
 echo "Starting Capture Loop." & \
 while $cancel; do
     echo "Capturing Image...Please Wait"
-    libcamera-still --shutter $shutter --gain $gain --awbgains 1,1 --immediate -o "../captures/image.jpg" -n --immediate  # Take a new photo
+    libcamera-still --shutter $shutter --gain $gain --awbgains 1,1 -o "../captures/image.jpg" -n --immediate  # Take a new photo
     start_time=$(date +%s)
     echo "Copying Newly Taken Image."
     cp "../captures/image.jpg" "../captures/$start_time.jpg"
