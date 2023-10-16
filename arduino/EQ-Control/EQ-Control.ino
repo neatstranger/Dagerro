@@ -15,10 +15,10 @@ const float ArcSecondsPerStep = 0.253125;
 
 
 const int smallInterruptCountPerCycle = 1105;
-const int smallInterruptMaxCycles = 810;
+const int smallInterruptMaxCycles = 81;
 
 const int largeInterruptCountPerCycle = 1107;
-const int maxInterruptCycles = 1500;
+const int maxInterruptCycles = 150;
 
 int currentCycle = 0;
 int currentInterruptCount = 0;
@@ -125,8 +125,12 @@ void countCycles(){
 
 
 void makeTrackingStep(){
-  RightAscensionStepperDriver.step();
-
+  noInterrupts();
+  for (int i = 0; i < 10; i++){
+    RightAscensionStepperDriver.step();
+    delayMicroseconds(10);
+  }
+  interrupts();
 }
 
 
