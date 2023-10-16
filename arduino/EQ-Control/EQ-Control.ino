@@ -14,10 +14,10 @@ const uint8_t interruptPin = 2;
 const float ArcSecondsPerStep = 0.253125;
 
 
-const int smallInterruptCountPerCycle = 1105;
+const int smallInterruptCountPerCycle = 11050;
 const int smallInterruptMaxCycles = 81;
 
-const int largeInterruptCountPerCycle = 1107;
+const int largeInterruptCountPerCycle = 11070;
 const int maxInterruptCycles = 150;
 
 int currentCycle = 0;
