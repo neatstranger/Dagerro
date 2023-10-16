@@ -14,11 +14,11 @@ const uint8_t interruptPin = 2;
 const float ArcSecondsPerStep = 0.253125;
 
 
-const int smallInterruptCountPerCycle = 11050;
-const int smallInterruptMaxCycles = 81;
+const uint32_t smallInterruptCountPerCycle = 5525;
+const int smallInterruptMaxCycles = 162;
 
-const int largeInterruptCountPerCycle = 11070;
-const int maxInterruptCycles = 150;
+const uint32_t  largeInterruptCountPerCycle = 5535;
+const int maxInterruptCycles = 138;
 
 int currentCycle = 0;
 int currentInterruptCount = 0;
@@ -126,7 +126,7 @@ void countCycles(){
 
 void makeTrackingStep(){
   noInterrupts();
-  for (int i = 0; i < 10; i++){
+  for (int i = 0; i < 5; i++){
     RightAscensionStepperDriver.step();
     delayMicroseconds(10);
   }
