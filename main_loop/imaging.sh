@@ -53,9 +53,10 @@ cd solves
 #Andromeda = RA_10.6917, DEC_41.2711
 #Triangulum Galaxy = RA_23.46825, DEC_30.661
 #Deer Lick Group = RA_339.271, 34.41975
+#Fireworks Galaxy = RA_317.5411714, DEC_60.15919444
 
-goal_ra=339.271
-goal_dec=34.41975
+goal_ra=317.5411714
+goal_dec=60.15919444
 shutter=30000000
 gain=8
 #Starting Capture Process
