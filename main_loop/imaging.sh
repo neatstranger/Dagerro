@@ -16,6 +16,8 @@ read -n1 empty
 #Focusing Loop
 mkdir focus && cd focus
 echo "Taking First Focus Picture"
+
+
 libcamera-still --shutter 5000000 --gain 8 --awbgains 1,1 -o test.jpg -n --immediate  # Take a new photo
 cancel=true
 feh --geometry 1000x1000 --reload 1 --scale-down --borderless test.jpg & \
@@ -53,10 +55,10 @@ cd solves
 #Andromeda = RA_10.6917, DEC_41.2711
 #Triangulum Galaxy = RA_23.46825, DEC_30.661
 #Deer Lick Group = RA_339.271, 34.41975
-#Fireworks Galaxy = RA_317.5411714, DEC_60.15919444
+#Fireworks Galaxy = 308.7208, DEC_60.1592
 
-goal_ra=317.5411714
-goal_dec=60.15919444
+goal_ra=308.7208
+goal_dec=60.1592
 shutter=30000000
 gain=8
 #Starting Capture Process
@@ -79,6 +81,7 @@ while $cancel; do
     cp "../captures/image.jpg" "../captures/$start_time.jpg"
     cp "../captures/image.dng" "../captures/$start_time.dng"
     if  [[ $iter -eq 20 ]];then
+    if  [[ $iter -eq 100 ]];then
         iter=0
         input=
         echo "Would you like to solve?(y/n)"
