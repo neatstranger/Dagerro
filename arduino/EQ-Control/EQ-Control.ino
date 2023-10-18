@@ -18,7 +18,7 @@ const uint32_t smallInterruptCountPerCycle = 5525;
 const int smallInterruptMaxCycles = 162;
 
 const uint32_t  largeInterruptCountPerCycle = 5535;
-const int maxInterruptCycles = 138;
+const int maxInterruptCycles = 300;
 
 int currentCycle = 0;
 int currentInterruptCount = 0;
