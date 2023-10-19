@@ -22,12 +22,7 @@ def getCurrentLocation(coords_file):
     return ra, dec
 
 def calculateMovement(current_ra, dest_ra, current_dec, dest_dec):
-    dec_diff = 0
-      #  -28   > 34 = -62
-    if current_dec > dest_dec:
-        dec_diff = dest_dec - current_dec
-    elif current_dec < dest_dec:
-        dec_diff = current_dec - dest_dec
+    dec_diff = dest_dec - current_dec
     ra_diff = dest_ra - current_ra
     return ra_diff, dec_diff
 
