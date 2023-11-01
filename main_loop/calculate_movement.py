@@ -22,8 +22,8 @@ def getCurrentLocation(coords_file):
     return ra, dec
 
 def calculateMovement(current_ra, dest_ra, current_dec, dest_dec):
-    ra_diff = dest_ra - current_ra
     dec_diff = dest_dec - current_dec
+    ra_diff = dest_ra - current_ra
     return ra_diff, dec_diff
 
 def calculateArcSeconds(degrees):
