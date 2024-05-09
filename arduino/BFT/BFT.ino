@@ -32,6 +32,11 @@ const uint8_t cameraPowerPin = 37;
 
 
 
+//Serial communication variables
+String serialCommand;
+bool commandFinished = false;
+
+
 
 void setup() {
   //Begin Serial Interfaces
@@ -49,6 +54,41 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  if (commandFinished){
+    executeCommand(serialCommand);
+    clearCommand();
+  }
 
+}
+
+void serialEvent() {
+  while (Serial.available()){
+    char inChar = (char)Serial.read();
+    serialCommand += inChar;
+    if (inChar == ';'){
+      commandFinished = true;
+    }
+  }
+}
+
+void executeCommand(String command){
+  
+  String commandType = command.substring(0,1);
+  long movement = command.substring(1).toInt();
+  
+  if(commandType == "D"){
+    Serial.println("Declination: "+ String(movement*2));
+  }
+  if(commandType == "E"){
+    Serial.println("Equitorial: "+ String(movement*2));
+  }
+  if(commandType == "F"){
+    Serial.println("Focus: "+ String(movement*2));
+  }
+
+}
+
+void clearCommand(){
+  serialCommand = "";
+  commandFinished = false;
 }
