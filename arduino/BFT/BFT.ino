@@ -10,7 +10,7 @@ const uint8_t timingInterruptPin = 2; //Hardware interrupt 4
 //Dec
 
 //DEC Stepper Pins
-const uint8_t decEnPin = 22;// Enable 22
+const uint8_t decEnPin = 24;// Enable 22
 const uint8_t decStepPin = 24;// Step 24
 const uint8_t decDirPin = 26;// Direction 26
  
