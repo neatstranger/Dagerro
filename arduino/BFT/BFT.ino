@@ -135,6 +135,10 @@ void makeTrackingStep(){
   if (stepsTaken == 48){
     secondaryPulseCount = !secondaryPulseCount;
   }
+  digitalWrite(eqStepPin, HIGH);
+  delayMicroseconds(160);
+  digitalWrite(eqStepPin, LOW);
+  
 
 }
 
