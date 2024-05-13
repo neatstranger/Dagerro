@@ -47,6 +47,22 @@ void setup() {
   //Notify Serial Port That Mount Is Initializing
   Serial.println("Mount is initializing");
   
+  //initialize the stepper motor pins
+  pinMode(decEnPin, OUTPUT);
+  pinMode(decStepPin, OUTPUT);
+  pinMode(decDirPin, OUTPUT);
+
+  pinMode(eqEnPin, OUTPUT);
+  pinMode(eqStepPin, OUTPUT);
+  pinMode(eqDirPin, OUTPUT);
+
+  pinMode(fcEnPin, OUTPUT);
+  pinMode(fcStepPin, OUTPUT);
+  pinMode(fcDirPin, OUTPUT);
+
+  pinMode(cameraPowerPIn, OUTPUT);
+
+
   //Initialization of RTC
   pinMode(timingInterruptPin, INPUT);
   RTC.enable32kHz(true);
