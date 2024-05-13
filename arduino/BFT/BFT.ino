@@ -27,11 +27,17 @@ const uint8_t cameraPowerPin = 52; //Camera Relay is Normally Closed.
 String serialCommand;
 bool commandFinished = false;
 
+int pulsesReceived = 0;
+bool secondaryPulseCount = false;
+int stepsTaken = 0;
+
+
 
 
 void setup() {
   initializeSerialInterfaces();
   initializePinDirections();
+  initializeInterruptInterfaces();
   initializeRTCModule();
 }
 
@@ -43,13 +49,6 @@ void loop() {
 
 
 
-void checkCommandFinished(){
-  if (commandFinished){
-    executeCommand(serialCommand);
-    clearCommand();
-  }
-}
-
 void initializeSerialInterfaces(){
   //Begin Serial Interfaces
   Serial.begin(115200);
@@ -57,31 +56,54 @@ void initializeSerialInterfaces(){
   delay(1);
   Serial.println("Serial Initialized");
 }
-
-void initializeRTCModule(){
-  //RTC Initialization
-  pinMode(timingInterruptPin, INPUT);
+void initializeRTCModule(){  
   RTC.enable32kHz(true);
   Serial.println("RTC Initialized");
 }
-
 void initializePinDirections(){
-  //initialize the stepper motor pins
+  //declination axis
   pinMode(decEnPin, OUTPUT);
   pinMode(decStepPin, OUTPUT);
   pinMode(decDirPin, OUTPUT);
-
+  //equitorial axis
   pinMode(eqEnPin, OUTPUT);
   pinMode(eqStepPin, OUTPUT);
   pinMode(eqDirPin, OUTPUT);
-
+  //focus control axis
   pinMode(fcEnPin, OUTPUT);
   pinMode(fcStepPin, OUTPUT);
   pinMode(fcDirPin, OUTPUT);
-
+  //camera power control 
   pinMode(cameraPowerPin, OUTPUT);
-  Serial.println("Stepper Motor Control Pins Initialized");
+  //interrupt pins
+  pinMode(timingInterruptPin, INPUT);
+  pinMode(eqHallInterruptPin, INPUT);
+  pinMode(decHallInterruptPin, INPUT);
+  Serial.println("Interface Pins Initialized");
 }
+void initializeInterruptInterfaces(){
+  attachInterrupt(digitalPinToInterrupt(timingInterruptPin), trackingInterrupt, RISING);
+}
+void checkCommandFinished(){
+  if (commandFinished){
+    executeCommand(serialCommand);
+    clearCommand();
+  }
+}
+
+
+
+void trackingInterrupt(){
+  pulsesReceived += 1;
+  if (pulsesReceived == 1584 && !secondaryPulseCount){
+    makeTrackingStep();
+  }
+  else if (pulsesReceived == 1583 && secondaryPulseCount){
+    makeTrackingStep();
+  }
+
+}
+
 
 void serialEvent() {
   while (Serial.available()){
@@ -94,7 +116,6 @@ void serialEvent() {
 }
 
 void executeCommand(String command){
-  
   String commandType = command.substring(0,1);
   long movement = command.substring(1).toInt();
   
@@ -108,6 +129,9 @@ void executeCommand(String command){
     Serial.println("Focus: "+ String(movement*2));
   }
 
+}
+void makeTrackingStep(){
+  stepsTaken += 1;
 }
 
 void clearCommand(){
