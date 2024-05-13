@@ -10,25 +10,25 @@ const uint8_t timingInterruptPin = 2; //Hardware interrupt 4
 //Dec
 
 //DEC Stepper Pins
-const uint8_t decEnPin = 24;// Enable 22
-const uint8_t decStepPin = 24;// Step 24
-const uint8_t decDirPin = 26;// Direction 26
+const uint8_t decEnPin = 38;// Enable 22
+const uint8_t decStepPin = 36;// Step 24
+const uint8_t decDirPin = 34;// Direction 26
  
 
 //EQ Stepper Pins
-const uint8_t eqEnPin = 23;// Enable 23
-const uint8_t eqStepPin = 25;// Step 25
-const uint8_t eqDirPin = 27;// Direction 27
+const uint8_t eqEnPin = 24;// Enable 23
+const uint8_t eqStepPin = 23;// Step 25
+const uint8_t eqDirPin = 22;// Direction 27
 
 
 //Focus Stepper Pins
-const uint8_t fcEnPin = 36;//Enable   36
-const uint8_t fcStepPin = 34;//Step  34
-const uint8_t fcDirPin = 32;//Direction 32
+const uint8_t fcEnPin = 27;//Enable   36
+const uint8_t fcStepPin = 26;//Step  34
+const uint8_t fcDirPin = 25;//Direction 32
 
 
 //Camera Power Disable Pin 37
-const uint8_t cameraPowerPin = 37;
+const uint8_t cameraPowerPin = 52;
 
 
 
