@@ -97,13 +97,13 @@ void trackingInterrupt(){
   pulsesReceived += 1;
   if (pulsesReceived == 1584 && !secondaryPulseCount){
     makeTrackingStep();
+    pulsesReceived = 0;
   }
   else if (pulsesReceived == 1583 && secondaryPulseCount){
     makeTrackingStep();
+    pulsesReceived = 0;
   }
-
 }
-
 
 void serialEvent() {
   while (Serial.available()){
@@ -118,7 +118,6 @@ void serialEvent() {
 void executeCommand(String command){
   String commandType = command.substring(0,1);
   long movement = command.substring(1).toInt();
-  
   if(commandType == "D"){
     Serial.println("Declination: "+ String(movement*2));
   }
@@ -128,10 +127,15 @@ void executeCommand(String command){
   if(commandType == "F"){
     Serial.println("Focus: "+ String(movement*2));
   }
-
 }
+
 void makeTrackingStep(){
+  digitalWrite(eqDirPin, HIGH);
   stepsTaken += 1;
+  if (stepsTaken == 48){
+    secondaryPulseCount = !secondaryPulseCount;
+  }
+
 }
 
 void clearCommand(){
