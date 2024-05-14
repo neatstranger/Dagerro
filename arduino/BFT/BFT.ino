@@ -138,8 +138,6 @@ void makeTrackingStep(){
   digitalWrite(eqStepPin, HIGH);
   delayMicroseconds(160);
   digitalWrite(eqStepPin, LOW);
-  
-
 }
 
 void clearCommand(){
