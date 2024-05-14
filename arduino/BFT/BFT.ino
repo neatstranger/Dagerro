@@ -33,6 +33,12 @@ int stepsTaken = 0;
 
 
 
+long currentEqSteps = 0;
+long maxEqSteps = 446900;
+
+long currentDecSteps = 0;
+long maxDecSteps = 223448;
+
 
 void setup() {
   initializeSerialInterfaces();
@@ -46,6 +52,17 @@ void loop() {
 }
 
 
+
+
+void serialEvent() {
+  while (Serial.available()){
+    char inChar = (char)Serial.read();
+    serialCommand += inChar;
+    if (inChar == ';'){
+      commandFinished = true;
+    }
+  }
+}
 
 
 
@@ -96,51 +113,103 @@ void checkCommandFinished(){
 void trackingInterrupt(){
   pulsesReceived += 1;
   if (pulsesReceived == 1584 && !secondaryPulseCount){
-    makeTrackingStep();
+      stepsTaken += 1;
+    if (stepsTaken == 48){
+      stepsTaken = 0;
+      secondaryPulseCount = !secondaryPulseCount;
+    }
+    moveEqAxis(1, false);
     pulsesReceived = 0;
   }
   else if (pulsesReceived == 1583 && secondaryPulseCount){
-    makeTrackingStep();
-    pulsesReceived = 0;
-  }
-}
-
-void serialEvent() {
-  while (Serial.available()){
-    char inChar = (char)Serial.read();
-    serialCommand += inChar;
-    if (inChar == ';'){
-      commandFinished = true;
+    stepsTaken += 1;
+    if (stepsTaken == 48){
+      stepsTaken = 0;
+      secondaryPulseCount = !secondaryPulseCount;
     }
+    moveEqAxis(1, false);
+    pulsesReceived = 0;
   }
 }
 
 void executeCommand(String command){
   String commandType = command.substring(0,1);
   long movement = command.substring(1).toInt();
+  bool direction = (movement > 0);
+  long steps = arcSecsToSteps(abs(movement));
+  String dir = String("LOW");
+  if (direction){
+    dir = String("HIGH");
+  }
   if(commandType == "D"){
-    Serial.println("Declination: "+ String(movement*2));
+    Serial.println("Declination Axis Move: "+ String(steps) +", Direction: "+String(direction));
+    moveDecAxis(steps, direction);
   }
   if(commandType == "E"){
-    Serial.println("Equitorial: "+ String(movement*2));
+    Serial.println("Equitorial Axis Move: "+ String(steps)+", Direction: "+String(direction));
+    moveEqAxis(steps, direction);
   }
   if(commandType == "F"){
-    Serial.println("Focus: "+ String(movement*2));
+    Serial.println("Focus Move: "+ String(movement)+", Direction: "+String(direction));
+    moveFcAxis(abs(movement), direction);
   }
 }
 
-void makeTrackingStep(){
-  digitalWrite(eqDirPin, HIGH);
-  stepsTaken += 1;
-  if (stepsTaken == 48){
-    secondaryPulseCount = !secondaryPulseCount;
-  }
-  digitalWrite(eqStepPin, HIGH);
-  delayMicroseconds(160);
-  digitalWrite(eqStepPin, LOW);
-}
+
 
 void clearCommand(){
   serialCommand = "";
   commandFinished = false;
+}
+
+void moveEqAxis(long steps, bool direction){
+  digitalWrite(eqDirPin, direction);
+  long i = 0;
+  while (i < steps){
+    digitalWrite(eqStepPin, HIGH);
+    delayMicroseconds(160);
+    digitalWrite(eqStepPin, LOW);
+    delayMicroseconds(160);
+    if(direction){
+      currentEqSteps += 1;
+    }else{
+      currentEqSteps -= 1;
+    }
+    i++;
+  }
+}
+
+void moveDecAxis(long steps, bool direction){
+  digitalWrite(decDirPin, direction);
+  long i = 0;
+  while (i < steps){
+    digitalWrite(decStepPin, HIGH);
+    delayMicroseconds(160);
+    digitalWrite(decStepPin, LOW);
+    delayMicroseconds(160);
+    if(direction){
+      currentDecSteps += 1;
+    }else{
+      currentDecSteps -= 1;
+    }
+    i++;
+  }
+}
+
+void moveFcAxis(long steps, bool direction){
+  digitalWrite(fcDirPin, direction);
+  long i = 0;
+  while (i < steps){
+    digitalWrite(fcStepPin, HIGH);
+    delayMicroseconds(160);
+    digitalWrite(fcStepPin, LOW);
+    delayMicroseconds(160);
+    i++;
+  }
+}
+
+long arcSecsToSteps(long arcSeconds){
+  const double arcSecondsPerStep = 0.725;
+  long steps = arcSeconds / arcSecondsPerStep;
+  return steps;
 }
