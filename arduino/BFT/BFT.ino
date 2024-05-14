@@ -45,6 +45,7 @@ void setup() {
   initializePinDirections();
   initializeInterruptInterfaces();
   initializeRTCModule();
+  initializeAxisMotors();
 }
 
 void loop() {
@@ -101,6 +102,11 @@ void initializePinDirections(){
 void initializeInterruptInterfaces(){
   attachInterrupt(digitalPinToInterrupt(timingInterruptPin), trackingInterrupt, RISING);
 }
+void initializeAxisMotors(){
+  digitalWrite(eqEnPin, HIGH);
+  digitalWrite(decEnPin, HIGH);
+  Serial.println("Motor output Enabled");
+}
 void checkCommandFinished(){
   if (commandFinished){
     executeCommand(serialCommand);
@@ -133,6 +139,8 @@ void trackingInterrupt(){
 }
 
 void executeCommand(String command){
+  Serial.println("Receiving Manual Update Command. Disabling RTC Interrupt Pulses");
+  RTC.enable32kHz(false);
   String commandType = command.substring(0,1);
   long movement = command.substring(1).toInt();
   bool direction = (movement > 0);
@@ -142,17 +150,19 @@ void executeCommand(String command){
     dir = String("HIGH");
   }
   if(commandType == "D"){
-    Serial.println("Declination Axis Move: "+ String(steps) +", Direction: "+String(direction));
+    Serial.println("Declination Axis Move: "+ String(steps) +", Direction: "+String(dir));
     moveDecAxis(steps, direction);
   }
   if(commandType == "E"){
-    Serial.println("Equitorial Axis Move: "+ String(steps)+", Direction: "+String(direction));
+    Serial.println("Equitorial Axis Move: "+ String(steps)+", Direction: "+String(dir));
     moveEqAxis(steps, direction);
   }
   if(commandType == "F"){
-    Serial.println("Focus Move: "+ String(movement)+", Direction: "+String(direction));
+    Serial.println("Focus Move: "+ String(movement)+", Direction: "+String(dir));
     moveFcAxis(abs(movement), direction);
   }
+  Serial.println("Finished Mnual Command, Enabling RTC Interrupt Pulses");
+  RTC.enable32kHz(true);
 }
 
 
@@ -166,16 +176,24 @@ void moveEqAxis(long steps, bool direction){
   digitalWrite(eqDirPin, direction);
   long i = 0;
   while (i < steps){
-    digitalWrite(eqStepPin, HIGH);
-    delayMicroseconds(160);
-    digitalWrite(eqStepPin, LOW);
-    delayMicroseconds(160);
-    if(direction){
-      currentEqSteps += 1;
+    if(abs(currentEqSteps) <= maxEqSteps){
+      digitalWrite(eqStepPin, HIGH);
+      delayMicroseconds(160);
+      digitalWrite(eqStepPin, LOW);
+      delayMicroseconds(160);
+      if(direction){
+        currentEqSteps += 1;
+      }else{
+        currentEqSteps -= 1;
+      }
+      i++;
     }else{
-      currentEqSteps -= 1;
+      i = steps;
+      Serial.println("End of ability to move on Equitorial Axis. Unable to Move Further.");
     }
-    i++;
+  }
+  if(steps > 1){
+    Serial.println("Completed Equitorial Move. Current Pos: "+String(currentEqSteps));
   }
 }
 
@@ -183,20 +201,29 @@ void moveDecAxis(long steps, bool direction){
   digitalWrite(decDirPin, direction);
   long i = 0;
   while (i < steps){
-    digitalWrite(decStepPin, HIGH);
-    delayMicroseconds(160);
-    digitalWrite(decStepPin, LOW);
-    delayMicroseconds(160);
-    if(direction){
-      currentDecSteps += 1;
+    if(abs(currentDecSteps) <= maxDecSteps){
+      digitalWrite(decStepPin, HIGH);
+      delayMicroseconds(160);
+      digitalWrite(decStepPin, LOW);
+      delayMicroseconds(160);
+      if(direction){
+        currentDecSteps += 1;
+      }else{
+        currentDecSteps -= 1;
+      }
+      i++;
     }else{
-      currentDecSteps -= 1;
+      i = steps;
+      Serial.println("End of ability to move on Declination Axis. Unable to Move Further.");
     }
-    i++;
+  }
+  if(steps > 1){
+    Serial.println("Completed Declination Move. Current Pos: "+ String(currentDecSteps));
   }
 }
 
 void moveFcAxis(long steps, bool direction){
+  digitalWrite(fcEnPin, HIGH);
   digitalWrite(fcDirPin, direction);
   long i = 0;
   while (i < steps){
@@ -206,6 +233,7 @@ void moveFcAxis(long steps, bool direction){
     delayMicroseconds(160);
     i++;
   }
+  digitalWrite(fcEnPin, LOW);
 }
 
 long arcSecsToSteps(long arcSeconds){
