@@ -118,7 +118,7 @@ void checkCommandFinished(){
 
 void trackingInterrupt(){
   pulsesReceived += 1;
-  if (pulsesReceived == 1584 && !secondaryPulseCount){
+  if (pulsesReceived == 1514 && !secondaryPulseCount){
       stepsTaken += 1;
     if (stepsTaken == 48){
       stepsTaken = 0;
@@ -127,7 +127,7 @@ void trackingInterrupt(){
     moveEqAxis(1, false);
     pulsesReceived = 0;
   }
-  else if (pulsesReceived == 1583 && secondaryPulseCount){
+  else if (pulsesReceived == 1513 && secondaryPulseCount){
     stepsTaken += 1;
     if (stepsTaken == 48){
       stepsTaken = 0;
@@ -161,6 +161,10 @@ void executeCommand(String command){
     Serial.println("Focus Move: "+ String(movement)+", Direction: "+String(dir));
     moveFcAxis(abs(movement), direction);
   }
+  if(commandType == "G"){
+    Serial.println("Interpreting General Command");
+    executeGeneralCommand(movement);
+   }
   Serial.println("Finished Mnual Command, Enabling RTC Interrupt Pulses");
   RTC.enable32kHz(true);
 }
@@ -234,6 +238,14 @@ void moveFcAxis(long steps, bool direction){
     i++;
   }
   digitalWrite(fcEnPin, LOW);
+}
+void executeGeneralCommand(long commandCode){
+  if (commandCode == 1){
+    Serial.println("RESETTING CAMERA");
+    digitalWrite(cameraPowerPin, HIGH);
+    delay(5000);
+    digitalWrite(cameraPowerPin, LOW);
+  }
 }
 
 long arcSecsToSteps(long arcSeconds){
