@@ -246,6 +246,14 @@ void executeGeneralCommand(long commandCode){
     delay(5000);
     digitalWrite(cameraPowerPin, LOW);
   }
+  if (commandCode == 2){
+    Serial.println("Disabling RTC Pulses");
+    RTC.enable32kHz(false);
+  }
+  if (commandCode == 3){
+    Serial.println("Enabling RTC Pulses");
+    RTC.enable32kHz(true);
+  }
 }
 
 long arcSecsToSteps(long arcSeconds){
