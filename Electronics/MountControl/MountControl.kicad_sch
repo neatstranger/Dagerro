@@ -1305,7 +1305,7 @@
   (symbol (lib_id "New:XY303V-3.81-3P") (at 824.23 256.54 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 02aca4dd-96db-4d67-812c-dff7c03d56e8)
-    (property "Reference" "DEC-Hall-Effect" (at 828.04 255.27 0)
+    (property "Reference" "DEC-Hall-Effect1" (at 828.04 255.27 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "XY303V-3.81-3P" (at 828.04 257.81 0)
@@ -1326,7 +1326,32 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "DEC-Hall-Effect") (unit 1)
+          (reference "DEC-Hall-Effect1") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 659.13 360.68 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 0d8d18a6-9adb-4f65-a604-3d85704e3104)
+    (property "Reference" "#PWR033" (at 652.78 360.68 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 655.32 360.68 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 659.13 360.68 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 360.68 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 5ec92875-3611-48e1-802f-ca78a7e988c7))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR033") (unit 1)
         )
       )
     )
@@ -1406,6 +1431,31 @@
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
           (reference "#PWR02") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+5V") (at 659.13 345.44 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 247e6220-b395-45ee-8b6b-1d5dcbb3a08c)
+    (property "Reference" "#PWR028" (at 662.94 345.44 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+5V" (at 655.32 345.44 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 659.13 345.44 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 345.44 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 00c1a467-44f6-42c6-944d-045719ed55b4))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR028") (unit 1)
         )
       )
     )
@@ -1493,7 +1543,7 @@
   (symbol (lib_id "New:DB128V-5.08-5P-GN-S") (at 808.99 242.57 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 384323be-1e8e-4fb8-b6ce-88ce9b02ead4)
-    (property "Reference" "DEC-Motor" (at 812.8 241.3 0)
+    (property "Reference" "DEC-Motor1" (at 812.8 241.3 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "DB128V-5.08-5P-GN-S" (at 812.8 243.84 0)
@@ -1516,7 +1566,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "DEC-Motor") (unit 1)
+          (reference "DEC-Motor1") (unit 1)
         )
       )
     )
@@ -1572,10 +1622,35 @@
     )
   )
 
+  (symbol (lib_id "power:+12V") (at 659.13 337.82 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 4af52c55-41b5-4fd2-834d-dde35a5ef7d0)
+    (property "Reference" "#PWR025" (at 662.94 337.82 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+12V" (at 655.32 337.82 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 659.13 337.82 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 337.82 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid cbb5f3b9-4f65-49e7-84ca-44dab5f0a21d))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR025") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "New:HOJLR2512-3W-1MR-1%") (at 781.05 229.87 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5003a189-0485-4a6e-901e-d1cb7899bec6)
-    (property "Reference" "RA-Current-Sense" (at 781.05 223.52 0)
+    (property "Reference" "RA-Current-Sense1" (at 781.05 223.52 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "HOJLR2512-3W-1MR-1%" (at 781.05 226.06 0)
@@ -1595,7 +1670,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "RA-Current-Sense") (unit 1)
+          (reference "RA-Current-Sense1") (unit 1)
         )
       )
     )
@@ -1646,6 +1721,31 @@
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
           (reference "#PWR013") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+5V") (at 659.13 340.36 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 583ec80e-dc17-4db4-a738-10bc34c87ab3)
+    (property "Reference" "#PWR026" (at 662.94 340.36 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+5V" (at 655.32 340.36 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 659.13 340.36 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 340.36 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 6dde0fbc-74b2-4b3c-b658-da43fd88cc1b))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR026") (unit 1)
         )
       )
     )
@@ -1704,7 +1804,7 @@
   (symbol (lib_id "New:WJ500V-5.08-2P-14-00A") (at 608.33 370.84 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 68e11e8e-a5a4-4f91-8dad-2493c4010e91)
-    (property "Reference" "24V-Input" (at 614.68 369.57 90)
+    (property "Reference" "24V-Input1" (at 614.68 369.57 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "WJ500V-5.08-2P-14-00A" (at 614.68 372.11 90)
@@ -1724,7 +1824,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "24V-Input") (unit 1)
+          (reference "24V-Input1") (unit 1)
         )
       )
     )
@@ -1791,7 +1891,7 @@
   (symbol (lib_id "New:XY303V-3.81-3P") (at 817.88 201.93 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 7d35fc62-5b4d-42a6-85ff-f9eeb8261c48)
-    (property "Reference" "RA-Hall-Effect" (at 821.69 200.66 0)
+    (property "Reference" "RA-Hall-Effect1" (at 821.69 200.66 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "XY303V-3.81-3P" (at 821.69 203.2 0)
@@ -1812,7 +1912,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "RA-Hall-Effect") (unit 1)
+          (reference "RA-Hall-Effect1") (unit 1)
         )
       )
     )
@@ -1976,10 +2076,60 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 659.13 353.06 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 9fa09567-3f5e-4f29-a6c8-5a48fa4d4985)
+    (property "Reference" "#PWR030" (at 652.78 353.06 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 655.32 353.06 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 659.13 353.06 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 353.06 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 8bcb000b-e30f-4a79-a149-605f5b94ce9d))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR030") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 659.13 358.14 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid a1d1e81f-7daa-47d4-a2d6-88ee9691671b)
+    (property "Reference" "#PWR032" (at 652.78 358.14 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 655.32 358.14 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 659.13 358.14 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 358.14 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 17a8527a-a38e-4de4-b1c9-c1bfe128e9db))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR032") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "New:WJ500V-5.08-2P-14-00A") (at 608.33 353.06 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ae0edabd-6af9-4485-a5e3-2a0489dbfaf1)
-    (property "Reference" "12V-Input" (at 614.68 351.79 90)
+    (property "Reference" "12V-Input1" (at 614.68 351.79 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "WJ500V-5.08-2P-14-00A" (at 614.68 354.33 90)
@@ -1999,7 +2149,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "12V-Input") (unit 1)
+          (reference "12V-Input1") (unit 1)
         )
       )
     )
@@ -2033,13 +2183,13 @@
   (symbol (lib_id "Connector:Conn_01x06_Socket") (at 825.5 331.47 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b95b0eff-4443-4753-ad6a-d19ac0f22a09)
-    (property "Reference" "DS3131-RTC" (at 826.77 331.47 0)
+    (property "Reference" "DS3131-RTC1" (at 826.77 331.47 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "Conn_01x06_Socket" (at 826.77 334.01 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "" (at 825.5 331.47 0)
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Horizontal" (at 825.5 331.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 825.5 331.47 0)
@@ -2054,7 +2204,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "DS3131-RTC") (unit 1)
+          (reference "DS3131-RTC1") (unit 1)
         )
       )
     )
@@ -2063,7 +2213,7 @@
   (symbol (lib_id "New:DB128V-5.08-5P-GN-S") (at 727.71 217.17 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid bd6c6c6d-1d3f-4686-8bc0-f70793ed5b7b)
-    (property "Reference" "Filter-Wheel" (at 731.52 215.9 0)
+    (property "Reference" "Filter-Wheel1" (at 731.52 215.9 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "DB128V-5.08-5P-GN-S" (at 731.52 218.44 0)
@@ -2086,7 +2236,32 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "Filter-Wheel") (unit 1)
+          (reference "Filter-Wheel1") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+5V") (at 659.13 342.9 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid cc8a624e-3a99-4c9b-b3b6-273270ce4787)
+    (property "Reference" "#PWR027" (at 662.94 342.9 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+5V" (at 655.32 342.9 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 659.13 342.9 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 342.9 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a5cc6583-108e-4d46-8541-dac711037d0d))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR027") (unit 1)
         )
       )
     )
@@ -2120,7 +2295,7 @@
   (symbol (lib_id "New:DB128V-5.08-5P-GN-S") (at 808.99 284.48 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid cead6d2c-d913-46e2-a6d9-0e89dc8b4379)
-    (property "Reference" "FOCUS-Motor" (at 812.8 283.21 0)
+    (property "Reference" "FOCUS-Motor1" (at 812.8 283.21 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "DB128V-5.08-5P-GN-S" (at 812.8 285.75 0)
@@ -2143,7 +2318,32 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "FOCUS-Motor") (unit 1)
+          (reference "FOCUS-Motor1") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 659.13 350.52 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid cf412b64-9101-4b20-823c-5693fb8c606a)
+    (property "Reference" "#PWR029" (at 652.78 350.52 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 655.32 350.52 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 659.13 350.52 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 350.52 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid de294010-4f8d-4175-936b-cb2b033e1c68))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR029") (unit 1)
         )
       )
     )
@@ -2177,7 +2377,7 @@
   (symbol (lib_id "New:DB128V-5.08-5P-GN-S") (at 808.99 224.79 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d2d7649a-eb48-4352-a319-721ee5f16fd3)
-    (property "Reference" "RA-Motor" (at 812.8 223.52 0)
+    (property "Reference" "RA-Motor1" (at 812.8 223.52 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "DB128V-5.08-5P-GN-S" (at 812.8 226.06 0)
@@ -2200,7 +2400,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "RA-Motor") (unit 1)
+          (reference "RA-Motor1") (unit 1)
         )
       )
     )
@@ -2209,7 +2409,7 @@
   (symbol (lib_id "New:HOJLR2512-3W-1MR-1%") (at 574.04 354.33 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d6091267-dc83-4e34-a84b-21a25e914d3e)
-    (property "Reference" "12V-Current-Sense" (at 574.04 347.98 0)
+    (property "Reference" "12V-Current-Sense1" (at 574.04 347.98 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "HOJLR2512-3W-1MR-1%" (at 574.04 350.52 0)
@@ -2229,7 +2429,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "12V-Current-Sense") (unit 1)
+          (reference "12V-Current-Sense1") (unit 1)
         )
       )
     )
@@ -2255,6 +2455,31 @@
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
           (reference "#PWR014") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 659.13 355.6 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid dd6934f7-72a4-4650-bf78-6f6e601d8971)
+    (property "Reference" "#PWR031" (at 652.78 355.6 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 655.32 355.6 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 659.13 355.6 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 659.13 355.6 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 1423e6d4-0f8f-4024-8414-1eab50097562))
+    (instances
+      (project "MountControl"
+        (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
+          (reference "#PWR031") (unit 1)
         )
       )
     )
@@ -2432,7 +2657,7 @@
   (symbol (lib_id "New:HOJLR2512-3W-1MR-1%") (at 778.51 247.65 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ed691230-f1de-465c-b7bf-a5b8c56c7ba8)
-    (property "Reference" "DEC-Current-Sense" (at 778.51 241.3 0)
+    (property "Reference" "DEC-Current-Sense1" (at 778.51 241.3 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "HOJLR2512-3W-1MR-1%" (at 778.51 243.84 0)
@@ -2452,7 +2677,7 @@
     (instances
       (project "MountControl"
         (path "/80d88b2c-00d3-4a77-9bdf-bbb47fc52c5b"
-          (reference "DEC-Current-Sense") (unit 1)
+          (reference "DEC-Current-Sense1") (unit 1)
         )
       )
     )
