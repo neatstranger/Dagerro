@@ -1,0 +1,20 @@
+﻿Designator,Mid X,Mid Y,Rotation,Layer
+12V-Current-Sense1,416.56,-416.56,270.0,top
+12V-Input1,414.02,-430.0415,180.0,top
+24V-Current-Sense1,403.86,-416.56,270.0,top
+24V-Input1,401.32,-430.0415,180.0,top
+A1,480.06,-434.34,90.0,top
+DEC-Current-Sense1,414.02,-353.568,180.0,top
+DEC-Hall-Effect1,565.15,-429.26,0.0,top
+DEC-Motor1,400.812,-343.408,270.0,top
+FOCUS-Current-Sense1,510.54,-416.56,270.0,top
+FOCUS-Motor1,500.38,-429.26,0.0,top
+Filter-Wheel1,528.32,-429.26,0.0,top
+RA-Current-Sense1,414.296,-387.858,180.0,top
+RA-Hall-Effect1,549.91,-429.26,0.0,top
+RA-Motor1,401.066,-377.698,270.0,top
+Thermistor1,565.404,-390.652,270.0,top
+Thermistor2,565.404,-377.952,270.0,top
+Thermistor3,565.404,-365.252,270.0,top
+Thermistor4,565.404,-352.552,270.0,top
+Thermistor5,565.404,-339.852,270.0,top

@@ -1,0 +1,7 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"12V-Current-Sense1, 24V-Current-Sense1, DEC-Current-Sense1, FOCUS-Current-Sense1, RA-Current-Sense1",RES-SMD_L6.4-W3.2-R2512,5,HOJLR2512-3W-1MR-1%,C2903470
+"12V-Input1, 24V-Input1, Thermistor1, Thermistor2, Thermistor3, Thermistor4, Thermistor5",CONN-TH_2P-P5.00_WJ500V-5.08-2P,7,WJ500V-5.08-2P-14-00A,C8465
+A1,Arduino_Mega2560_R3_Shield,1,Arduino_Mega2560_R3_Shield,
+"DEC-Hall-Effect1, RA-Hall-Effect1",CONN-TH_XY303V-3.81-3P,2,XY303V-3.81-3P,C557684
+"DEC-Motor1, FOCUS-Motor1, Filter-Wheel1, RA-Motor1",CONN-TH_5P-P5.08_DIBO_DB128V-5.08-5P-GN-S,4,DB128V-5.08-5P-GN-S,C2927513
+DS3131-RTC1,PinHeader_1x06_P2.54mm_Horizontal,1,Conn_01x06_Socket,
