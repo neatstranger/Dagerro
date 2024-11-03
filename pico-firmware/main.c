@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
 
@@ -113,23 +114,91 @@ void callBack(uint gpio, uint32_t events){
 		}
 	}
 }
+int char_array_to_int(const char *chars, int length) {
+    int result = 0;
+    int is_negative = 0;
+    int start = 0;
 
+    // Check if the number is negative
+    if (chars[0] == '-') {
+        is_negative = 1;
+        start = 1; // Start from the next character
+    }
+
+    for (int i = start; i < length; i++) {
+        // Shift the result by 1 decimal place (multiply by 10)
+        result = (result << 3) + (result << 1); // result * 10 using bit shifting
+
+        // Convert the current character to its integer value and add it
+        result += chars[i] - '0';
+    }
+
+    // Apply the negative sign if needed
+    if (is_negative) {
+        result = -result;
+    }
+
+    return result;
+}
+int executeMoveCommand(int eq, int dec, int fc){
+	trackingEnabled = false;
+	printf("Disabled Tracking For Manual Control\n......\n");
+	printf("Moving EQ Axis %d steps, in the %d direction \n", abs(eq), eq > 1);
+	printf("Moving DEC Axis %d steps, in the %d direction \n", abs(dec), dec >1);
+	
+}
 int main(){
 	stdio_init_all();
 	printf("Initializing...\n");
 	initializeI2C();
 	initializeIo();
 	gpio_set_irq_enabled_with_callback(KHZ, 0x04, 1, & callBack);
-
-
-	uint8_t addr = 0x20;
-	uint8_t rxdata[2] = {0x00, 0x00};
-	
+	bool messageCompleted = false;
+	char message[1000];	
+	int messageChar = 0;
+	int cmds[3];
 	while(1){
-		//scanI2CBus();
-		sleep_ms(1000);
+		if(uart_is_readable(uart0)){
+			char c = uart_getc(uart0);
+			message[messageChar] = c;
+			messageChar += 1;
+			if(c == '\r'){
+				messageCompleted = true;
+				message[messageChar -1] = 0;
+				messageChar = 0;
+			}
+		if(messageCompleted){
+			int count = 0; 
+			char numArr[1000];
+			int varsPulled = 0;
+			for(int i = 0; i < 1000; i++){
+				if(message[i] != 0 || varsPulled < 3){
+					if(message[i] != ';'){
+						numArr[count] = message[i];
+						count++;
+					}else{
+						cmds[varsPulled] = char_array_to_int(numArr, count);								  varsPulled += 1;
+						count = 0;
+						for(int i = 0; i < 1000; i++){
+							numArr[i] = 0; 
+						}
+					}
+				}
+			}	
+			messageCompleted = false;
+			executeMoveCommand(cmds[0], cmds[1], cmds[2]);
+			for (int i = 0; i < 1000; i++){
+				message[i] = 0;
+			}
+			cmds[0] = 0;
+			cmds[1] = 0;
+			cmds[2] = 0;
+		}
+
+
+
 	}	
 
 
     }
-
+}
