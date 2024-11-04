@@ -143,9 +143,33 @@ int char_array_to_int(const char *chars, int length) {
 int executeMoveCommand(int eq, int dec, int fc){
 	trackingEnabled = false;
 	printf("Disabled Tracking For Manual Control\n......\n");
-	printf("Moving EQ Axis %d steps, in the %d direction \n", abs(eq), eq > 1);
-	printf("Moving DEC Axis %d steps, in the %d direction \n", abs(dec), dec >1);
+	if(eq == 0){
+		printf("No EQ Command\n");
+	}else if(eq != 0){
+		printf("Moving EQ Axis %d steps, in the %d direction \n", abs(eq), eq > 0);
+		moveEQAxis(eq > 0, abs(eq));
+	}
+	if(dec == 0){
+		printf("No DEC Command\n");
+	}else if (dec != 0){
+		printf("Moving DEC Axis %d steps, in the %d direction \n", abs(dec), dec >0);
+		moveDecAxis(dec > 0, abs(dec));
+	}
+	if(fc == 0){
+		printf("No Focus Command\n");
+	}else if( fc != 0){
+		printf("Moving FC Axis %d steps, in the %d direction \n", abs(fc), fc >0);
+		moveFocAxis(fc > 0, abs(fc));
+	}
+
+	printf(".....\nFinished all movement commands, re-enabling tracking ...\n");
+
 	
+}
+int executeMachineCommand(int commandNumber){
+	printf("Machine command %d  initiated \n", commandNumber);
+	return 0;
+
 }
 int main(){
 	stdio_init_all();
@@ -167,7 +191,8 @@ int main(){
 				message[messageChar -1] = 0;
 				messageChar = 0;
 			}
-		if(messageCompleted){
+		}
+		if(messageCompleted && message[0] != 'G'){
 			int count = 0; 
 			char numArr[1000];
 			int varsPulled = 0;
@@ -193,12 +218,28 @@ int main(){
 			cmds[0] = 0;
 			cmds[1] = 0;
 			cmds[2] = 0;
+		}else if(messageCompleted){
+			int count = 0;
+			char numArr[1000];
+			for (int i = 1; i < 1000; i++){
+				if(message[i] != 0){
+					numArr[count] = message[i];
+					count++;
+				}else{
+					numArr[i] = message[i];
+			}
 		}
-
+				
+			executeMachineCommand(char_array_to_int(numArr, count));
+			messageCompleted = false;
+			for (int i = 0; i < 1000; i++){
+				message[i] = 0;
+				numArr[i] = 0;
+			}
 
 
 	}	
 
-
-    }
+	}
+    
 }
