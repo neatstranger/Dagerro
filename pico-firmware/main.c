@@ -22,8 +22,8 @@
 #define STEP_FC 19
 #define DIR_FC 18
 
-#define TRK_DIR 1
-#define STEP_SLEEP_US 10
+#define TRK_DIR 0
+#define STEP_SLEEP_US 100
 
 
 
@@ -97,7 +97,7 @@ void callBack(uint gpio, uint32_t events){
 				if(loops == LG_CT_LOOPS-1){
 					onLGLoop = false;
 					loops = 0;
-					printf("LoopReset/n");
+					printf("LoopReset\n");
 				}
 			}
 		}else{
@@ -163,11 +163,25 @@ int executeMoveCommand(int eq, int dec, int fc){
 	}
 
 	printf(".....\nFinished all movement commands, re-enabling tracking ...\n");
+	trackingEnabled = true;
 
 	
 }
 int executeMachineCommand(int commandNumber){
 	printf("Machine command %d  initiated \n", commandNumber);
+	if(commandNumber == 1){
+		printf("Disabling Steppers and Tracking\n");
+		gpio_put(EN_EQ, 0);
+		gpio_put(EN_DEC, 0);
+		gpio_put(EN_FC, 0);
+		trackingEnabled = false;
+	}else if(commandNumber == 2){
+		gpio_put(EN_EQ, 1);
+		gpio_put(EN_DEC, 1);
+		gpio_put(EN_FC, 1);
+	}else if(commandNumber == 3){
+		trackingEnabled = true;
+	}
 	return 0;
 
 }
@@ -176,6 +190,8 @@ int main(){
 	printf("Initializing...\n");
 	initializeI2C();
 	initializeIo();
+	gpio_put(EN_CAM, 1);
+
 	gpio_set_irq_enabled_with_callback(KHZ, 0x04, 1, & callBack);
 	bool messageCompleted = false;
 	char message[1000];	
