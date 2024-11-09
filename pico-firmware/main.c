@@ -14,16 +14,16 @@
 #define STEP_DEC 7
 #define DIR_DEC 8
 
-#define EN_EQ 10
+#define EN_EQ 12 
 #define STEP_EQ 11
-#define DIR_EQ 12
+#define DIR_EQ 10
 
 #define EN_FC 20
 #define STEP_FC 19
 #define DIR_FC 18
 
-#define TRK_DIR 0
-#define STEP_SLEEP_US 100
+#define TRK_DIR 1
+#define STEP_SLEEP_US 500
 
 
 
@@ -44,45 +44,44 @@ int initializeIo(){
 	int controlPins[] = {EN_5V, EN_CAM, EN_DEC, STEP_DEC, DIR_DEC, EN_EQ, STEP_EQ, DIR_EQ, EN_FC, STEP_FC, DIR_FC};
 	int numPins  = sizeof(controlPins) / sizeof(controlPins[0]);
 	for(int i = 0; i < numPins; i++){
+		printf("Initiated Pin # %d \n", controlPins[i]);
 		gpio_init(controlPins[i]);
 		gpio_set_dir(controlPins[i], GPIO_OUT);
 	}
+	gpio_init(KHZ);
+	gpio_set_dir(KHZ, GPIO_IN);
 	return 0;
 		
 }
 
 
 int moveDecAxis(bool dir, long int steps){
-	gpio_put(EN_DEC, 1);
 	gpio_put(DIR_DEC, dir);
+	busy_wait_us_32(100);
 	for(long int i = 0; i < steps; i++){
 		gpio_put(STEP_DEC, 1);
 		busy_wait_us_32(STEP_SLEEP_US);
 		gpio_put(STEP_DEC, 0);
 	}
-	gpio_put(EN_DEC, 0);
 	return 0;
 }
 int moveEQAxis(bool dir, long int steps){
-	gpio_put(EN_EQ, 1);
 	gpio_put(DIR_EQ, dir);
+	busy_wait_us_32(100);
 	for(long int i = 0; i < steps; i++){
 		gpio_put(STEP_EQ, 1);
 		busy_wait_us_32(STEP_SLEEP_US);
 		gpio_put(STEP_EQ, 0);
 	}
-	gpio_put(EN_EQ, 0);
 	return 0;
 }
 int moveFocAxis(bool dir, long int steps){
-	gpio_put(EN_FC, 1);
-	gpio_put(DIR_EQ, dir);
+	gpio_put(DIR_FC, dir);
 	for(long int i = 0; i < steps; i++){
 		gpio_put(STEP_FC, 1);
 		busy_wait_us_32(STEP_SLEEP_US);
 		gpio_put(STEP_FC, 0);
 	}
-	gpio_put(EN_FC, 0);
 	return 0;
 }
 
@@ -176,11 +175,16 @@ int executeMachineCommand(int commandNumber){
 		gpio_put(EN_FC, 0);
 		trackingEnabled = false;
 	}else if(commandNumber == 2){
+		printf("Enabling All Axis");
 		gpio_put(EN_EQ, 1);
 		gpio_put(EN_DEC, 1);
 		gpio_put(EN_FC, 1);
 	}else if(commandNumber == 3){
 		trackingEnabled = true;
+	}else if (commandNumber ==4){
+		gpio_put(EN_CAM, 0);
+		sleep_ms(50);
+		gpio_put(EN_CAM, 1);
 	}
 	return 0;
 
@@ -190,13 +194,14 @@ int main(){
 	printf("Initializing...\n");
 	initializeI2C();
 	initializeIo();
-	gpio_put(EN_CAM, 1);
-
+	gpio_put(EN_CAM, 2);
 	gpio_set_irq_enabled_with_callback(KHZ, 0x04, 1, & callBack);
+	executeMachineCommand(3);
 	bool messageCompleted = false;
 	char message[1000];	
 	int messageChar = 0;
 	int cmds[3];
+	printf("Tracking Enabled: %d \n", trackingEnabled);
 	while(1){
 		if(uart_is_readable(uart0)){
 			char c = uart_getc(uart0);
