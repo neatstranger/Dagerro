@@ -14,9 +14,9 @@
 #define STEP_DEC 7
 #define DIR_DEC 8
 
-#define EN_EQ 12 
+#define EN_EQ 10 
 #define STEP_EQ 11
-#define DIR_EQ 10
+#define DIR_EQ 12
 
 #define EN_FC 20
 #define STEP_FC 19
@@ -194,7 +194,10 @@ int main(){
 	printf("Initializing...\n");
 	initializeI2C();
 	initializeIo();
-	gpio_put(EN_CAM, 2);
+	gpio_put(EN_CAM, 1);
+	gpio_put(EN_DEC, 1);
+	gpio_put(EN_EQ, 1);
+	gpio_put(EN_FC, 1);
 	gpio_set_irq_enabled_with_callback(KHZ, 0x04, 1, & callBack);
 	executeMachineCommand(3);
 	bool messageCompleted = false;
