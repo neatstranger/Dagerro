@@ -22,7 +22,7 @@
 #define STEP_FC 19
 #define DIR_FC 18
 
-#define TRK_DIR 1
+/*#define TRK_DIR 1 */
 #define STEP_SLEEP_US 500
 
 
@@ -38,6 +38,7 @@ bool onLGLoop = false;
 int loops = 0;
 
 bool trackingEnabled = true;
+bool TRK_DIR = true;
 
 
 int initializeIo(){
@@ -185,6 +186,8 @@ int executeMachineCommand(int commandNumber){
 		gpio_put(EN_CAM, 0);
 		sleep_ms(50);
 		gpio_put(EN_CAM, 1);
+	}else if (commandNumber == 5){
+		TRK_DIR = !TRK_DIR;
 	}
 	return 0;
 
