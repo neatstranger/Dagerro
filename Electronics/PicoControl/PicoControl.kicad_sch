@@ -3216,6 +3216,16 @@
 	)
 	(wire
 		(pts
+			(xy 143.51 143.51) (xy 152.4 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d43e13f-5095-4341-8efd-5fea341dba99")
+	)
+	(wire
+		(pts
 			(xy 49.53 50.8) (xy 57.15 50.8)
 		)
 		(stroke
@@ -3506,6 +3516,16 @@
 	)
 	(wire
 		(pts
+			(xy 143.51 132.08) (xy 152.4 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f51d7017-cfae-415b-b8d5-f42b16f457b3")
+	)
+	(wire
+		(pts
 			(xy 60.96 124.46) (xy 71.12 124.46)
 		)
 		(stroke
@@ -3655,6 +3675,17 @@
 		)
 		(uuid "3a24421c-f54c-4edd-a04d-9c0e5bb4485a")
 	)
+	(label "EQ_HALL"
+		(at 143.51 132.08 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3de756da-ce48-4950-bbe5-6671ce82b268")
+	)
 	(label "STEP_DEC"
 		(at 49.53 26.67 180)
 		(fields_autoplaced yes)
@@ -3775,6 +3806,28 @@
 			(justify left bottom)
 		)
 		(uuid "8269cdbd-c493-4b4a-8562-bb70aa5a07ef")
+	)
+	(label "DEC_HALL"
+		(at 143.51 143.51 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "894c0322-f5eb-4dec-896a-1444d43920d7")
+	)
+	(label "EQ_HALL"
+		(at 71.12 99.06 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "897b0428-57c5-470f-9215-d10b1f51a353")
 	)
 	(label "DIR_FOCUS"
 		(at 49.53 55.88 180)
@@ -3908,6 +3961,17 @@
 		)
 		(uuid "d708502c-dbe4-44a3-b214-5f8396c92aef")
 	)
+	(label "DEC_HALL"
+		(at 71.12 101.6 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d9018ac8-3e88-48ef-b80e-0c59390cd95a")
+	)
 	(label "STEP_EQ"
 		(at 49.53 38.1 180)
 		(fields_autoplaced yes)
@@ -4026,6 +4090,73 @@
 			(project ""
 				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
 					(reference "#PWR046")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 152.4 127 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "091c18c8-bfc5-403b-b14e-9b180454b6bb")
+		(property "Reference" "#PWR053"
+			(at 146.05 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 148.59 126.9999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 152.4 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "454b14f0-10fd-4cfb-bd81-d9aa40b8bdfe")
+		)
+		(instances
+			(project "PicoControl"
+				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
+					(reference "#PWR053")
 					(unit 1)
 				)
 			)
@@ -4679,6 +4810,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3.3V")
+		(at 152.4 129.54 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3b102471-cf9c-4741-8622-1c528ab3858f")
+		(property "Reference" "#PWR052"
+			(at 156.21 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 148.59 129.5399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 152.4 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3cfd0623-3fbc-4836-b6ed-7331cc4a7d5c")
+		)
+		(instances
+			(project ""
+				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
+					(reference "#PWR052")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 248.92 124.46 0)
 		(unit 1)
@@ -4965,6 +5163,73 @@
 			(project ""
 				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
 					(reference "USB1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 152.4 138.43 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4881a292-3f68-42f9-b80b-22af08d2ecd8")
+		(property "Reference" "#PWR054"
+			(at 146.05 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 148.59 138.4299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 152.4 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "84972b73-9c34-4a5e-8c4a-acf282c76828")
+		)
+		(instances
+			(project "PicoControl"
+				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
+					(reference "#PWR054")
 					(unit 1)
 				)
 			)
@@ -5460,6 +5725,79 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 157.48 129.54 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "76c9cb65-2fe3-4b11-a93e-53aebdcbb499")
+		(property "Reference" "J3"
+			(at 158.75 128.2699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "Conn_01x03_Pin"
+			(at 158.75 130.8099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal"
+			(at 157.48 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 157.48 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 157.48 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "78642ef2-41c0-4f28-8345-7b08ca45843d")
+		)
+		(pin "3"
+			(uuid "44a13fce-0edb-4df3-b076-3cc413ad2a12")
+		)
+		(pin "2"
+			(uuid "58847e48-3a86-4a56-89c2-433b44e1e5fb")
+		)
+		(instances
+			(project ""
+				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 162.56 66.04 0)
 		(unit 1)
@@ -5520,6 +5858,73 @@
 			(project "PicoControl"
 				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
 					(reference "#PWR048")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 152.4 140.97 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7b31ff19-c47d-4984-8232-235c8280a9b2")
+		(property "Reference" "#PWR055"
+			(at 156.21 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 148.59 140.9699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 152.4 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5bf3a866-74ce-4f9f-ba0e-177fe8a1c06c")
+		)
+		(instances
+			(project "PicoControl"
+				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
+					(reference "#PWR055")
 					(unit 1)
 				)
 			)
@@ -6588,6 +6993,79 @@
 			(project "PicoControl"
 				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
 					(reference "#PWR042")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 157.48 140.97 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d41ab4b2-549b-4d84-9537-6a08e75cd679")
+		(property "Reference" "J5"
+			(at 158.75 139.6999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "Conn_01x03_Pin"
+			(at 158.75 142.2399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal"
+			(at 157.48 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 157.48 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 157.48 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "97287b95-0360-449b-8258-9a87c08d36d2")
+		)
+		(pin "3"
+			(uuid "ab23fbbe-38e0-4a54-88c1-d286d84d6443")
+		)
+		(pin "2"
+			(uuid "425e7172-87ac-4faf-aae5-1ee47a204bf4")
+		)
+		(instances
+			(project "PicoControl"
+				(path "/34b166a4-ebe1-47f7-9bdf-7eb24a6a3f49"
+					(reference "J5")
 					(unit 1)
 				)
 			)
