@@ -23,7 +23,7 @@
 #define DIR_FC 18
 
 /*#define TRK_DIR 1 */
-#define STEP_SLEEP_US 500
+#define STEP_SLEEP_US 100
 
 
 
@@ -38,7 +38,7 @@ bool onLGLoop = false;
 int loops = 0;
 
 bool trackingEnabled = true;
-bool TRK_DIR = true;
+bool TRK_DIR = false;
 
 
 int initializeIo(){
