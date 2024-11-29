@@ -36,6 +36,9 @@
 int currentInterrupts = 0;
 bool onLGLoop = false;
 int loops = 0;
+int decComp = 100;
+bool decCompDir = false;
+bool decCompEnabled = false;
 
 bool trackingEnabled = true;
 bool TRK_DIR = false;
@@ -94,6 +97,9 @@ void callBack(uint gpio, uint32_t events){
 				currentInterrupts = 0;
 				moveEQAxis(TRK_DIR, 1);
 				loops += 1;
+				if(loops % decComp && decCompEnabled){
+					moveDecAxis(decCompDir, decComp);
+				}
 				if(loops == LG_CT_LOOPS-1){
 					onLGLoop = false;
 					loops = 0;
@@ -105,6 +111,9 @@ void callBack(uint gpio, uint32_t events){
 				currentInterrupts = 0;
 				moveEQAxis(TRK_DIR, 1);
 				loops +=1;
+				if (loops % decComp && decCompEnabled){
+					moveDecAxis(decCompDir, decComp);
+				}
 				if(loops == SMALL_CT_LOOPS -1){
 					loops = 0;
 					onLGLoop = true;
@@ -188,7 +197,16 @@ int executeMachineCommand(int commandNumber){
 		gpio_put(EN_CAM, 1);
 	}else if (commandNumber == 5){
 		TRK_DIR = !TRK_DIR;
+	}else if (commandNumber == 6){
+		decComp += 10;
+	}else if (commandNumber == 6){
+		decComp -= 10;
+	}else if (commandNumber == 7){
+		decCompDir = !decCompDir;
+	}else if (commandNumber == 8){
+		decCompEnabled = !decCompEnabled;
 	}
+
 	return 0;
 
 }
