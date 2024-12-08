@@ -13,6 +13,7 @@ CN5,CONN-TH_2P-P5.00_WJ500V-5.08-2P,1,Camera,C8465
 "D1, D2",SMC_L7.1-W6.2-LS8.1-RD,2,B560C-13-F,C85100
 J1,PinHeader_1x03_P2.54mm_Vertical,1,Conn_01x03_Pin,
 J2,PinHeader_1x03_P2.54mm_Vertical,1,Conn_01x03_Socket,
+"J3, J5",PinHeader_1x03_P2.54mm_Horizontal,2,Conn_01x03_Pin,
 J4,PinHeader_1x06_P2.54mm_Vertical,1,Conn_01x06_Pin,
 "L1, L2",IND-SMD_L11.5-W10.0_FXL1040,2,FXL1040-8R2-M,C167232
 "R1, R5",1206,2,162k,C22815
