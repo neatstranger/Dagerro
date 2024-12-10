@@ -22,6 +22,10 @@
 #define STEP_FC 19
 #define DIR_FC 18
 
+
+#define HOME_EQ 2
+#define HOME_DEC 3
+
 /*#define TRK_DIR 1 */
 #define STEP_SLEEP_US 100
 
@@ -54,6 +58,14 @@ int initializeIo(){
 	}
 	gpio_init(KHZ);
 	gpio_set_dir(KHZ, GPIO_IN);
+	
+	gpio_init(HOME_EQ);
+	gpio_init(HOME_DEC);
+
+	gpio_set_dir(HOME_EQ, GPIO_IN);
+	gpio_set_dir(HOME_DEC, GPIO_IN);
+	gpio_pull_up(HOME_EQ);
+	gpio_pull_up(HOME_DEC);
 	return 0;
 		
 }
@@ -227,6 +239,12 @@ int main(){
 	int cmds[3];
 	printf("Tracking Enabled: %d \n", trackingEnabled);
 	while(1){
+		if(!gpio_get(HOME_EQ)){
+			printf("EQ IS HOMED \n");
+		}
+		if(!gpio_get(HOME_DEC)){
+			printf("DEC IS HOMED \n");
+		}
 		if(uart_is_readable(uart0)){
 			char c = uart_getc(uart0);
 			message[messageChar] = c;
