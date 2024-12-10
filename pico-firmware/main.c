@@ -23,7 +23,7 @@
 #define DIR_FC 18
 
 /*#define TRK_DIR 1 */
-#define STEP_SLEEP_US 100
+#define STEP_SLEEP_US 500
 
 
 
