@@ -2969,7 +2969,7 @@
 		(uuid "a443a6cb-fe1c-471b-a08b-9094798ec948")
 		(at 181.8 67.93 -90)
 		(property "Reference" "U3"
-			(at -6.33 -0.01 180)
+			(at -6.33 -0.01 0)
 			(layer "F.SilkS")
 			(uuid "391486c8-80cc-4080-bba7-3d15754a8445")
 			(effects
@@ -3362,15 +3362,15 @@
 			(uuid "43f64558-bf32-450b-bd32-89a4c1cc5c73")
 		)
 		(embedded_fonts no)
-		(model "${COMPONENTS_3D_FILES}/CONN-TH_DB125-2.54-3P-GN.step"
+		(model "${COMPONENTS_3D_FILES}/CONN-TH_DB125-2.54-4P-GN.step"
 			(offset
-				(xyz 0 -0.02 0)
+				(xyz 3.9 0 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -0 -0 -0)
 			)
 		)
 	)
