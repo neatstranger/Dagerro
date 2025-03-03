@@ -1,0 +1,6 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+C1,1206,1,0.1u,
+"J1, J5",PinHeader_1x02_P2.54mm_Vertical,2,Conn_01x02_Pin,
+"J2, J4",PinHeader_1x01_P2.54mm_Vertical,2,Conn_01x01_Pin,
+J3,PinHeader_1x03_P2.54mm_Vertical,1,Conn_01x03_Pin,
+U1,QFN-16_L3.0-W3.0-P0.50-TL-EP1.7,1,MT6701QT-STD_C2913974,C2913974
