@@ -1,4 +1,5 @@
 import toupcam
+from PIL import Image
 
 class App:
     def __init__(self):
@@ -18,6 +19,18 @@ class App:
                 self.hcam.PullImageV4(self.buf, 0, 24, 0, None)
                 self.total += 1
                 print('pull image ok, total = {}'.format(self.total))
+                
+                # Calculate row_bytes according to the DIB (padded to a multiple of 4 bytes)
+                row_bytes = (self.width * 3 + 3) & ~3
+                # Create the image (assuming raw data in BGR format)
+                image = Image.frombuffer("RGB", (self.width, self.height), self.buf, "raw", "BGR", row_bytes, 1)
+                # Flip vertically if necessary (DIB images are usually bottom-up)
+                image = image.transpose(Image.FLIP_TOP_BOTTOM)
+                
+                # Save the image in the working directory
+                filename = "image_{:03d}.bmp".format(self.total)
+                image.save(filename)
+                print('Image saved as {}'.format(filename))
             except toupcam.HRESULTException as ex:
                 print('pull image failed, hr=0x{:x}'.format(ex.hr & 0xffffffff))
         else:
