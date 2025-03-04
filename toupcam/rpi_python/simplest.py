@@ -1,4 +1,5 @@
 import toupcam
+from PIL import Image
 
 
 class App:
