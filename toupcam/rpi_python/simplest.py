@@ -1,6 +1,5 @@
 import toupcam
-from PIL import Image
-import toupcam.raw_sdk
+
 
 class App:
     def __init__(self):
