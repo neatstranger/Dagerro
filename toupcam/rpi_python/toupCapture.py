@@ -8,10 +8,11 @@ if len(a) > 0:
     total = 0
     print('\t = [{} x {}]'.format(a[0].model.res[0].width, a[0].model.res[0].height))
     hcam = toupcam.Toupcam.Open(a[0].id)
-    hcam.put_ExpoTime(1000000)
-    hcam.put_Option(toupcam.TOUPCAM_OPTION_RAW, 1)
+    
+    #hcam.put_Option(toupcam.TOUPCAM_OPTION_RAW, 1)
     hcam.put_Option(toupcam.TOUPCAM_OPTION_TRIGGER, 1)
-    hcam.put_Option(toupcam.TOUPCAM_IOCONTROLTYPE_SET_TRIGGERSOURCE, 0x05)
+    #hcam.put_Option(toupcam.TOUPCAM_IOCONTROLTYPE_SET_TRIGGERSOURCE, 0x05)
+    hcam.put_ExpoTime(1000000)
     try:
         width, height = hcam.get_Size()
         bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
