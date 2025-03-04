@@ -16,7 +16,8 @@ class App:
     def CameraCallback(self, nEvent):
         if nEvent == toupcam.TOUPCAM_EVENT_IMAGE:
             try:
-                self.hcam.PullImageV4(self.buf, 0, 24, 0, None)
+                self.hcam.WaitImageV4(self.buf, 1000, 0, 24, 0, None)
+                #self.hcam.PullImageV4(self.buf, 0, 24, 0, None)
                 self.total += 1
                 print('pull image ok, total = {}'.format(self.total))
                 
@@ -28,7 +29,7 @@ class App:
                 image = image.transpose(Image.FLIP_TOP_BOTTOM)
                 
                 # Save the image in the working directory
-                filename = "image_{:03d}.bmp".format(self.total)
+                filename = "image_{:03d}.raw".format(self.total)
                 image.save(filename)
                 print('Image saved as {}'.format(filename))
             except toupcam.HRESULTException as ex:
