@@ -47,6 +47,9 @@ class App:
             if self.hcam:
                 try:
                     self.hcam.put_ExpoTime(1000000)
+                    self.hcam.put_Option(toupcam.TOUPCAM_OPTION_RAW, 1)
+                    self.hcam.put_Option(toupcam.TOUPCAM_OPTION_TRIGGER, 1)
+                    self.hcam.put_Option(toupcam.TOUPCAM_IOCONTROLTYPE_SET_TRIGGERSOURCE, 0x05)
                     width, height = self.hcam.get_Size()
                     self.width, self.height = width, height
                     bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
@@ -57,6 +60,7 @@ class App:
                             self.hcam.StartPullModeWithCallback(self.cameraCallback, self)
                         except toupcam.HRESULTException as ex:
                             print('failed to start camera, hr=0x{:x}'.format(ex.hr & 0xffffffff))
+                    self.hcam.Trigger(1)
                     input('press ENTER to exit')
                 finally:
                     self.hcam.Close()
