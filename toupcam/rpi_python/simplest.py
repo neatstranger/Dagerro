@@ -47,7 +47,7 @@ class App:
             if self.hcam:
                 try:
                     self.hcam.put_ExpoTime(1000000)
-                    self.hcam.put_Option(toupcam.TOUPCAM_OPTION_RAW, 1)
+                    self.hcam.put_Option(toupcam.TOUPCAM_OPTION_RAW, 0)
                     self.hcam.put_Option(toupcam.TOUPCAM_OPTION_TRIGGER, 1)
                     self.hcam.put_Option(toupcam.TOUPCAM_IOCONTROLTYPE_SET_TRIGGERSOURCE, 0x05)
                     width, height = self.hcam.get_Size()
