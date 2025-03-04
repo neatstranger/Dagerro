@@ -17,7 +17,7 @@ class App:
     def CameraCallback(self, nEvent):
         if nEvent == toupcam.TOUPCAM_EVENT_IMAGE:
             try:
-                self.hcam.PullImageV4(self.buf, 1, 24, 0, None)
+                self.hcam.PullImageV4(self.buf, 0, 24, 0, None)
                 self.total += 1
                 print('pull image ok, total = {}'.format(self.total))
                 
@@ -46,6 +46,7 @@ class App:
             self.hcam = toupcam.Toupcam.Open(a[0].id)
             if self.hcam:
                 try:
+                    self.hcam.put_ExpoTime(10000)
                     width, height = self.hcam.get_Size()
                     self.width, self.height = width, height
                     bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
