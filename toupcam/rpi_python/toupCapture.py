@@ -14,7 +14,7 @@ if len(a) > 0:
             bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
             print('image size: {} x {}, bufsize = {}'.format(width, height, bufsize))
             buf = bytes(bufsize)
-            hcam.TriggerSyncV4(hcam, 1000, buf, 24, 0, None)
+            hcam.TriggerSyncV4(buf, 1000, 0, 24, 0, None)
             #hcam.PullImageV4(buf, 0, 24, 0, None)
             # total += 1
             print('pull image ok, total = {}'.format(total))
