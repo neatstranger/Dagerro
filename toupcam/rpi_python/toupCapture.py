@@ -16,13 +16,13 @@ if len(a) > 0:
             buf = bytes(bufsize)
             hcam.TriggerSyncV4(1000, buf, 24, 0, None)
             #hcam.PullImageV4(buf, 0, 24, 0, None)
-            total += 1
-            print('pull image ok, total = {}'.format(total))
-            row_bytes = (width * 3 + 3) & ~3
-            image = Image.frombuffer("RGB", (width, height), buf, "raw", "BGR", row_bytes, 1)
-            image = image.transpose(Image.FLIP_TOP_BOTTOM)
-            filename = "image_{:03d}.bmp".format(total)
-            image.save(filename)
-            print('Image saved as {}'.format(filename))
+            # total += 1
+            # print('pull image ok, total = {}'.format(total))
+            # row_bytes = (width * 3 + 3) & ~3
+            # image = Image.frombuffer("RGB", (width, height), buf, "raw", "BGR", row_bytes, 1)
+            # image = image.transpose(Image.FLIP_TOP_BOTTOM)
+            # filename = "image_{:03d}.bmp".format(total)
+            # image.save(filename)
+            # print('Image saved as {}'.format(filename))
         except toupcam.HRESULTException as ex:
                 print('pull image failed, hr=0x{:x}'.format(ex.hr & 0xffffffff))
