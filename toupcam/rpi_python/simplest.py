@@ -46,6 +46,7 @@ class App:
             if self.hcam:
                 try:
                     width, height = self.hcam.get_Size()
+                    self.width, self.height = width, height
                     bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
                     print('image size: {} x {}, bufsize = {}'.format(width, height, bufsize))
                     self.buf = bytes(bufsize)
