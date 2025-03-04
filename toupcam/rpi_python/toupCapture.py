@@ -10,6 +10,7 @@ if len(a) > 0:
             total = 0
             print('\t = [{} x {}]'.format(r.width, r.height))
             hcam = toupcam.Toupcam.Open(a[0].id)
+            hcam.put_ExpoTime(1000000)
             width, height = hcam.get_Size()
             bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
             print('image size: {} x {}, bufsize = {}'.format(width, height, bufsize))
