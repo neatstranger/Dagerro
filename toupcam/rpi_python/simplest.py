@@ -1,5 +1,6 @@
 import toupcam
 from PIL import Image
+import toupcam.raw_sdk
 
 class App:
     def __init__(self):
@@ -16,8 +17,7 @@ class App:
     def CameraCallback(self, nEvent):
         if nEvent == toupcam.TOUPCAM_EVENT_IMAGE:
             try:
-                self.hcam.WaitImageV4(self.buf, 1000, 0, 24, 0, None)
-                #self.hcam.PullImageV4(self.buf, 0, 24, 0, None)
+                self.hcam.PullImageV4(self.buf, 1, 24, 0, None)
                 self.total += 1
                 print('pull image ok, total = {}'.format(self.total))
                 
