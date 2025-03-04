@@ -46,7 +46,6 @@ class App:
             self.hcam = toupcam.Toupcam.Open(a[0].id)
             if self.hcam:
                 try:
-                    self.hcam.put_ExpoTime(10000)
                     width, height = self.hcam.get_Size()
                     self.width, self.height = width, height
                     bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
