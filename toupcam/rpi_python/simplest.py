@@ -29,7 +29,7 @@ class App:
                 image = image.transpose(Image.FLIP_TOP_BOTTOM)
                 
                 # Save the image in the working directory
-                filename = "image_{:03d}.raw".format(self.total)
+                filename = "image_{:03d}.bmp".format(self.total)
                 image.save(filename)
                 print('Image saved as {}'.format(filename))
             except toupcam.HRESULTException as ex:
