@@ -441,7 +441,7 @@ TOUPCAM_IOCONTROLTYPE_GET_TRIGGERSOURCE            = 0x0d  # 0x00 => Opto-isolat
                                                            # 0x03 => Counter
                                                            # 0x04 => PWM
                                                            # 0x05 => Software
-TOUPCAM_IOCONTROLTYPE_SET_TRIGGERSOURCE            = 0x05
+TOUPCAM_IOCONTROLTYPE_SET_TRIGGERSOURCE            = 0x0e
 TOUPCAM_IOCONTROLTYPE_GET_TRIGGERDELAY             = 0x0f  # Trigger delay time in microseconds, range: [0, 5000000]
 TOUPCAM_IOCONTROLTYPE_SET_TRIGGERDELAY             = 0x10
 TOUPCAM_IOCONTROLTYPE_GET_BURSTCOUNTER             = 0x11  # Burst Counter, range: [1 ~ 65535]
