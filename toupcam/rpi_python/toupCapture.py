@@ -53,7 +53,7 @@ class App:
             self.hcam = toupcam.Toupcam.Open(a[0].id)
             if self.hcam:
                 try:
-                    self.hcam.put_ExpoTime(2000)
+                    self.hcam.put_ExpoTime(4000)
                     self.hcam.put_Option(toupcam.TOUPCAM_OPTION_RAW, 1)
                     self.hcam.put_Option(toupcam.TOUPCAM_OPTION_BITDEPTH, 1)
                     self.hcam.put_Option(toupcam.TOUPCAM_OPTION_TRIGGER, 1)
