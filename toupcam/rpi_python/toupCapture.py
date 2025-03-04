@@ -14,10 +14,10 @@ if len(a) > 0:
             bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
             print('image size: {} x {}, bufsize = {}'.format(width, height, bufsize))
             buf = bytes(bufsize)
-            #hcam.TriggerSyncV4(1000, buf, 24, 0, None)
+            hcam.TriggerSyncV4(hcam, 1000, buf, 24, 0, None)
             #hcam.PullImageV4(buf, 0, 24, 0, None)
             # total += 1
-            # print('pull image ok, total = {}'.format(total))
+            print('pull image ok, total = {}'.format(total))
             # row_bytes = (width * 3 + 3) & ~3
             # image = Image.frombuffer("RGB", (width, height), buf, "raw", "BGR", row_bytes, 1)
             # image = image.transpose(Image.FLIP_TOP_BOTTOM)
