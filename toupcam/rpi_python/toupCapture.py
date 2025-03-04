@@ -19,27 +19,25 @@ class App:
     def CameraCallback(self, nEvent):
         if nEvent == toupcam.TOUPCAM_EVENT_IMAGE:
             try:
-                # For RAW output, assume 16-bit per pixel (adjust if needed)
-                # Here we pass 16 for the bit depth.
+                # Pull raw image with 16-bit depth.
                 self.hcam.PullImageV4(self.buf, 0, 16, 0, None)
                 self.total += 1
                 print('pull raw image ok, total = {}'.format(self.total))
                 
-                # Convert the raw data buffer to a NumPy array.
-                # Assume each pixel is 16 bits, so use dtype=np.uint16.
+                # Convert the raw byte buffer to a NumPy array (16-bit grayscale).
+                # The buffer size and sensor dimensions were set in run().
                 raw_array = np.frombuffer(self.buf, dtype=np.uint16).reshape((self.height, self.width))
                 
-                # Debayering (demosaicing): convert Bayer pattern to RGB.
-                # Adjust cv2.COLOR_BayerBG2BGR if your sensor uses a different Bayer layout.
+                # Debayer the raw Bayer pattern data to get an RGB image.
+                # Adjust the conversion flag if your sensor uses a different Bayer pattern.
                 rgb_image = cv2.cvtColor(raw_array, cv2.COLOR_BayerBG2BGR)
                 
-                # Optionally, if the image is upside down, flip it vertically.
+                # Flip vertically if needed (DIB images are often stored upside-down).
                 rgb_image = cv2.flip(rgb_image, 0)
                 
-                # Convert the NumPy array to a PIL Image and save it.
-                image = Image.fromarray(rgb_image)
-                filename = "raw_image_{:03d}.bmp".format(self.total)
-                image.save(filename)
+                # Save the image using OpenCV's imwrite to preserve 16-bit data.
+                filename = "raw_image_{:03d}.png".format(self.total)
+                cv2.imwrite(filename, rgb_image)
                 print('RAW image saved as {}'.format(filename))
             except toupcam.HRESULTException as ex:
                 print('pull raw image failed, hr=0x{:x}'.format(ex.hr & 0xffffffff))
