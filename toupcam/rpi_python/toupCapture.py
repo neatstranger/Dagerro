@@ -12,6 +12,7 @@ if len(a) > 0:
     hcam.put_Option(toupcam.TOUPCAM_OPTION_RAW, 1)
     hcam.put_Option(toupcam.TOUPCAM_OPTION_TRIGGER, 1)
     hcam.put_Option(toupcam.TOUPCAM_IOCONTROLTYPE_SET_TRIGGERSOURCE, 0x05)
+    hcam.Trigger(1)
     try:
         width, height = hcam.get_Size()
         bufsize = toupcam.TDIBWIDTHBYTES(width * 24) * height
